@@ -1,11 +1,11 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'Open Sans', sans-serif;
 }
 
-body{
+body {
   background-color: var(--background);
 }
 
@@ -14,11 +14,16 @@ body{
   --text: #1c1c1c;
   --accent: #6b4226;
   --hover: #c49b63;
-  --light-brown:#F9F0E0;
+  --white: #F8EEDB;
   --grey: rgb(162, 162, 162);
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: 'Lora', serif;
 }
 
@@ -27,13 +32,22 @@ a {
   color: inherit;
 }
 
-input{
+input {
   outline: none;
   border: none;
 }
 
-button{
+button {
   cursor: pointer;
   border: none;
   background: none;
+}
+
+.shadow-elegant {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.07);
+  transition: 0.3s;
+}
+
+.shadow-elegant:hover{
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
 }

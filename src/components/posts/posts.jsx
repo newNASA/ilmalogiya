@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import { FaArrowRightLong } from "react-icons/fa6";
+
 import "./posts.scss";
 
 const Posts = ({ posts }) => {
@@ -9,7 +11,7 @@ const Posts = ({ posts }) => {
           const hasImg = !!post.img;
           return (
             <div
-              className={`post_item${hasImg ? "" : " post_item--noimg"}`}
+              className={`post_item${hasImg ? "" : " post_item--noimg"} shadow-elegant`}
               key={post.id || post.title}
             >
               {hasImg && (
@@ -30,7 +32,7 @@ const Posts = ({ posts }) => {
                   <p>{post.description}</p>
                 </div>
                 <div className="post_link">
-                  <Link to={`/posts/${post.id}`}>To'liq o'qish</Link>
+                  <Link to={`/posts/${post.id}`}>To'liq o'qish <FaArrowRightLong /></Link>
                 </div>
               </div>
             </div>

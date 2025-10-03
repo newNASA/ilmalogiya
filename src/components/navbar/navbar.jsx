@@ -14,7 +14,7 @@ function Navbar() {
                 <h1>Ilmalogiya</h1>
             </Link>
             <form action="" className="search">
-                <input type="text" placeholder='Qidirish...' />
+                <input type="search" placeholder='Qidirish...' />
                 <button type='submit'>
                     <IoSearchSharp />
                 </button>

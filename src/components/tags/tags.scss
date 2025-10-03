@@ -8,10 +8,11 @@
     }
 
     button {
-        padding: 5px 10px;
-        background-color: var(--light-brown);
+        padding: 4px 12px;
+        background-color: var(--white);
         border-radius: 50pc;
         text-align: center;
+        color: var(--text);
         transition: 0.3s;
     }
 }
