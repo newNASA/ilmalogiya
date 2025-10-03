@@ -1,0 +1,17 @@
+.tags {
+    display: flex;
+    gap: 5px;
+
+    .active{
+        background-color: var(--accent);
+        color: var(--background);
+    }
+
+    button {
+        padding: 5px 10px;
+        background-color: var(--light-brown);
+        border-radius: 50pc;
+        text-align: center;
+        transition: 0.3s;
+    }
+}

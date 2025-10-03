@@ -3,14 +3,19 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Open Sans', sans-serif;
+}
+
+body{
   background-color: var(--background);
 }
 
 :root {
-  --background: #f5e6cc;
+  --background: #F5E6CC;
   --text: #1c1c1c;
   --accent: #6b4226;
   --hover: #c49b63;
+  --light-brown:#F9F0E0;
+  --grey: rgb(162, 162, 162);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -24,4 +29,11 @@ a {
 
 input{
   outline: none;
+  border: none;
+}
+
+button{
+  cursor: pointer;
+  border: none;
+  background: none;
 }

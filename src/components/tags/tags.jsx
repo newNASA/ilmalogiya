@@ -1,10 +1,12 @@
-const Tags = ({ setSelectedTag }) => {
+import "./tags.scss";
+
+const Tags = ({ selectedTag, setSelectedTag }) => {
   const tags = ["all", "react", "javascript", "node", "backend", "css", "frontend"];
 
   return (
-    <div>
+    <div className="tags">
       {tags.map((tag) => (
-        <button key={tag} onClick={() => setSelectedTag(tag)}>
+        <button key={tag} onClick={() => setSelectedTag(tag)} className={selectedTag === tag ? "active" : ""}>
           {tag}
         </button>
       ))}
