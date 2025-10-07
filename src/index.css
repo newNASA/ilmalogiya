@@ -32,6 +32,10 @@ a {
   color: inherit;
 }
 
+p{
+  color: var(--text);
+}
+
 input {
   outline: none;
   border: none;

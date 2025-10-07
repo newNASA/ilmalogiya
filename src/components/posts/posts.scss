@@ -21,7 +21,12 @@
 
         .post_left {
             width: 35%;
-            // height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            img{
+                width: 100%;
+            }
         }
 
         .post_right {

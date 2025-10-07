@@ -1,13 +1,17 @@
-.main-section{
-    margin-top: 50px;
-    padding: 0 100px;
-    display: flex;
-    .left{
-        width: 70%;
-        // border: 1px solid red;
-    }
+.main-section {
+  margin-top: 50px;
+  padding: 0 100px;
+  display: flex;
+  gap: 30px;
 
-    .right{
-        width: 30%;
-    }
+  .left {
+    width: 70%;
+  }
+
+  .right {
+    width: 30%;
+    position: sticky;
+    align-self: flex-start; 
+    top: 20px;
+  }
 }

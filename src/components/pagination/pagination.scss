@@ -1,0 +1,25 @@
+.pagination {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+
+  button {
+    background: var(--white);
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease;
+
+    &:hover {
+      background: var(--hover);
+    }
+
+    &.active {
+      background: var(--accent);
+      color: var(--white);
+      font-weight: 600;
+    }
+  }
+}
