@@ -55,5 +55,34 @@ nav {
                 background-color: inherit;
             }
         }
+
+        .search-results {
+            position: absolute;
+            top: 75px;
+            width: 300px;
+            background-color: var(--white);
+            border: 1px solid var(--grey);
+            border-radius: 10px;
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 100;
+            padding: 10px 15px;
+
+            li {
+                list-style: none;
+                
+                p {
+                    display: block;
+                    color: var(--text);
+                    text-decoration: none;
+                    font-family: var(--open-sans);
+                    transition: .3s;
+
+                    &:hover {
+                        color: var(--accent);
+                    }
+                }
+            }
+        }
     }
 }

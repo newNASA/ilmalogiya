@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Open Sans', sans-serif;
+  font-family: var(--open-sans);
 }
 
 body {
@@ -16,6 +16,9 @@ body {
   --hover: #c49b63;
   --white: #F8EEDB;
   --grey: rgb(162, 162, 162);
+
+  --open-sans: 'Open Sans', sans-serif;
+  --lora: 'Lora', serif;
 }
 
 h1,
@@ -24,7 +27,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Lora', serif;
+  font-family: var(--lora);
 }
 
 a {

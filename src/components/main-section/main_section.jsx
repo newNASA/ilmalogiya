@@ -3,30 +3,13 @@ import { useState } from "react";
 import Tags from "../tags/tags";
 import Posts from "../posts/posts";
 import RightPosts from "../rightPosts/rightposts";
-import Pagination from "../pagination/pagination"; // ✅ import qildik
+import Pagination from "../pagination/pagination";
+import { useMemo } from "react";
 
-import image1 from "../../assets/post_imgs/i.png";
-import image2 from "../../assets/post_imgs/image.png";
-
-const MainSection = () => {
+const MainSection = ({ posts }) => {
   const [selectedTag, setSelectedTag] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 10; 
-
-  const posts = [
-    { id: 1, img: image1, title: "React Tutorial", description: "Birinchi sichqonchani Daglas Engelbart ismli amerikalik olim ixtiro qilgan.", tags: ["react", "javascript"] },
-    { id: 2, img: image2, title: "Node.js Guide", description: "Lorem ipsum dolor sit amet.", tags: ["node", "backend"] },
-    { id: 3, title: "SCSS Tricks", description: "Lorem ipsum dolor sit amet.", tags: ["css", "frontend"] },
-    { id: 4, title: "Next.js Best Practices", description: "Lorem ipsum dolor sit amet.", tags: ["react", "frontend"] },
-    { id: 5, title: "MongoDB Deep Dive", description: "Lorem ipsum dolor sit amet.", tags: ["backend", "database"] },
-    { id: 6, title: "JavaScript Tips", description: "Lorem ipsum dolor sit amet.", tags: ["javascript", "frontend"] },
-    { id: 7, title: "Express Setup", description: "Lorem ipsum dolor sit amet.", tags: ["node", "backend"] },
-    { id: 8, title: "HTML5 Features", description: "Lorem ipsum dolor sit amet.", tags: ["frontend", "html"] },
-    { id: 9, title: "TypeScript Basics", description: "Lorem ipsum dolor sit amet.", tags: ["typescript", "frontend"] },
-    { id: 10, title: "Database Indexing", description: "Lorem ipsum dolor sit amet.", tags: ["database", "backend"] },
-    { id: 11, title: "React Hooks Guide", description: "Lorem ipsum dolor sit amet.", tags: ["react", "javascript"] },
-    { id: 12, title: "API Security", description: "Lorem ipsum dolor sit amet.", tags: ["backend", "security"] },
-  ];
 
   const filteredPosts =
     selectedTag === "all"
@@ -48,7 +31,10 @@ const MainSection = () => {
     setCurrentPage(1);
   };
 
-  const randomPost = posts[Math.floor(Math.random() * posts.length)];
+  const randomPost = useMemo(
+    () => posts[Math.floor(Math.random() * posts.length)],
+    [posts]
+  );
   const lastPost = posts[posts.length - 1];
 
   return (
@@ -71,4 +57,4 @@ const MainSection = () => {
   );
 };
 
-export default MainSection;
+export default MainSection; 
