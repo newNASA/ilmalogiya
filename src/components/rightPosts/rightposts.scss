@@ -12,14 +12,15 @@
         background-color: var(--white);
         padding: 25px;
         border-radius: 15px;
-
+        
         h2 {
             color: var(--accent);
             margin-bottom: 15px;
             font-size: 1.25rem;
         }
-
+        
         img {
+            border-radius: 15px;
             width: 100%;
             margin-bottom: 10px;
         }

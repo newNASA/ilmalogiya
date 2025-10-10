@@ -4,8 +4,9 @@
   display: flex;
   gap: 30px;
   margin-bottom: 50px;
-
+  
   .left {
+    overflow: hidden;
     width: 70%;
   }
 
