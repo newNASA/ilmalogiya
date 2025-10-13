@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { BsTelegram } from "react-icons/bs";
 
 import "./rightposts.scss";
@@ -26,7 +27,9 @@ const RightPosts = ({ randomPost, lastPost }) => {
           </div>
         ) : null}
         <div className="title">
-          <h3>{randomPost.title}</h3>
+          <Link to={`/posts/${randomPost.id}`}>
+            <h3>{randomPost.title}</h3>
+          </Link>
         </div>
         <div className="text">
           <p>{randomPost.description.length > 150
@@ -44,7 +47,9 @@ const RightPosts = ({ randomPost, lastPost }) => {
           </div>
         ) : null}
         <div className="title">
-          <h3>{lastPost.title}</h3>
+          <Link to={`/posts/${lastPost.id}`}>
+            <h3>{lastPost.title}</h3>
+          </Link>
         </div>
         <div className="text">
           <p>{lastPost.description.length > 150

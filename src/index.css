@@ -35,7 +35,7 @@ a {
   color: inherit;
 }
 
-p{
+p {
   color: var(--text);
 }
 
@@ -55,6 +55,19 @@ button {
   transition: 0.3s;
 }
 
-.shadow-elegant:hover{
+.shadow-elegant:hover {
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+
+.post_tags {
+  display: flex;
+  gap: 10px;
+
+  button {
+    background-color: var(--background);
+    padding: 4px 12px;
+    border-radius: 50pc;
+    color: var(--accent);
+    cursor: auto;
+  }
 }
