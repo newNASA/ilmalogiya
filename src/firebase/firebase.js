@@ -1,8 +1,8 @@
 // src/firebase/firebase.js
 
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore"; // 🔥 Firestore uchun
-import { getAnalytics } from "firebase/analytics";
+import { getFirestore } from "firebase/firestore"; 
+// import { getAnalytics } from "firebase/analytics";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDm5CRpYpkiQLSDjAMgKRsUn21DC2aoIpc",
@@ -16,7 +16,7 @@ const firebaseConfig = {
 
 // Firebase ilovasini ishga tushirish
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+// const analytics = getAnalytics(app);
 
 // 🔹 Firestore’ni yaratamiz va eksport qilamiz
 export const db = getFirestore(app);
