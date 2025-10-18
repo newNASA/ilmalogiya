@@ -10,7 +10,6 @@ function App() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Firestore'dan ma'lumot olish
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -33,12 +32,14 @@ function App() {
 
   return (
     <Router>
-      <Navbar posts={posts} />
-      <Routes>
-        <Route path="/" element={<MainSection posts={posts} />} />
-        <Route path="/posts/:id" element={<MainSection posts={posts} isDetailPage />} />
-      </Routes>
-      <Footer />
+      <div className="app">
+        <Navbar posts={posts} />
+        <Routes>
+          <Route path="/" element={<MainSection posts={posts} />} />
+          <Route path="/posts/:id" element={<MainSection posts={posts} isDetailPage />} />
+        </Routes>
+        <Footer />
+      </div>
     </Router>
   );
 }
