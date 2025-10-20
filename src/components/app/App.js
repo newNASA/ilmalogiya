@@ -1,10 +1,12 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "../navbar/navbar";
-import MainSection from "../main-section/main_section";
-import Footer from "../footer/footer";
 import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase/firebase"
+
+import Loader from "../loader/loader";
+import Navbar from "../navbar/navbar";
+import MainSection from "../main-section/main_section";
+import Footer from "../footer/footer";
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -28,7 +30,7 @@ function App() {
     fetchPosts();
   }, []);
 
-  if (loading) return <p className="loading">Yuklanmoqda...</p>;
+  if (loading) return <Loader />;
 
   return (
     <Router>

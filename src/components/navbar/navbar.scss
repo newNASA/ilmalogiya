@@ -90,3 +90,15 @@ nav {
         }
     }
 }
+
+@media screen and (max-width: 1441px) {
+  nav {
+    padding: 0 50px;
+  }
+}
+
+@media screen and (max-width: 751px) {
+    nav{
+        padding: 0 25px;
+    }
+}

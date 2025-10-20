@@ -72,3 +72,20 @@
         }
     }
 }
+
+@media screen and (max-width: 930px) {
+    .posts {
+        .post_item {
+            flex-direction: column;
+            max-height: none;
+
+            .post_left {
+                width: 100%;
+            }
+
+            .post_right {
+                width: 100%;
+            }
+        }
+    }
+}

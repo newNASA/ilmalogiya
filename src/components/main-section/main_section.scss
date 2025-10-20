@@ -17,3 +17,30 @@
     top: 20px;
   }
 }
+
+@media screen and (max-width: 1441px) {
+  .main-section {
+    padding: 0 50px;
+  }
+}
+
+@media screen and (max-width: 1350px) {
+  .main-section {
+    flex-direction: column;
+    
+    .left, .right {
+      width: 100%;
+    }
+
+    .right {
+      position: static;
+      margin-top: 30px;
+    }
+  }
+}
+
+@media screen and (max-width: 751px) {
+    .main-section{
+        padding: 0 25px;
+    }
+}

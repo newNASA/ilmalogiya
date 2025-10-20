@@ -12,13 +12,13 @@
         background-color: var(--white);
         padding: 25px;
         border-radius: 15px;
-        
+
         h2 {
             color: var(--accent);
             margin-bottom: 15px;
             font-size: 1.25rem;
         }
-        
+
         img {
             border-radius: 10px;
             width: 100%;
@@ -35,11 +35,18 @@
 
         p {
             font-size: 0.875rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
     }
+
     .telegram {
         text-align: center;
-        p{
+
+        p {
             margin-bottom: 10px;
         }
 
@@ -47,13 +54,34 @@
             background-color: var(--accent);
             padding: 12px 24px;
             border-radius: 10px;
-            display: inline-flex; 
+            display: inline-flex;
             align-items: center;
             gap: 5px;
             color: var(--white);
-            svg{
+
+            svg {
                 fill: var(--white);
             }
+        }
+    }
+}
+
+@media screen and (max-width: 1350px) {
+    .rightposts {
+
+        .lastpost,
+        .randompost {
+            img {
+                display: none;
+            }
+        }
+
+        .text p {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
     }
 }

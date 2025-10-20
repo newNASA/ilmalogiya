@@ -48,9 +48,7 @@ const RightPosts = ({ randomPost, lastPost }) => {
         </div>
         <div className="text">
           <p>
-            {randomPost.description.length > 150
-              ? randomPost.description.slice(0, 150) + "..."
-              : randomPost.description}
+            {randomPost.description}
           </p>
         </div>
       </div>
@@ -73,9 +71,7 @@ const RightPosts = ({ randomPost, lastPost }) => {
         </div>
         <div className="text">
           <p>
-            {lastPost.description.length > 150
-              ? lastPost.description.slice(0, 150) + "..."
-              : lastPost.description}
+            {lastPost.description}
           </p>
         </div>
       </div>
