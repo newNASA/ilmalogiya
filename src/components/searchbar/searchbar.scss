@@ -75,11 +75,16 @@ form {
 
 @media screen and (max-width: 1025px) {
     form{
-        input{
-            width: 350px;
-        }
         .search-results{
             top: 30px;
+        }
+    }
+}
+
+@media screen and (max-width: 501px) {
+    form{
+        input{
+            width: 200px;
         }
     }
 }

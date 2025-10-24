@@ -1,6 +1,7 @@
 .tags {
     display: flex;
     gap: 5px;
+    flex-wrap: wrap;
 
     .active{
         background-color: var(--accent);

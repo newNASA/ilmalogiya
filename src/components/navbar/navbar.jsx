@@ -38,13 +38,13 @@ function Navbar({ posts }) {
                     <button onClick={() => setMenuOpen(false)} className='close'><IoClose /></button>
                 </div>
 
-                <ul>
+                {/* <ul>
                     <li>
                         <Link to='/' onClick={() => setMenuOpen(false)}>Bosh sahifa</Link>
                     </li>
                     <li>
                     </li>
-                </ul>
+                </ul> */}
 
                 <div className="menu-footer">
                     <Link to='https://tirikchilik.uz/ilmalogiya' className='donat' target='_blank' onClick={() => setMenuOpen(false)}>
