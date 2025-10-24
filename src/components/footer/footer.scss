@@ -7,3 +7,11 @@ footer{
         color: var(--background);
     }
 }
+
+@media screen and (max-width: 426px) {
+    footer{
+        p{
+            font-size: 0.8rem;
+        }
+    }
+}

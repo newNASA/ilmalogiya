@@ -1,94 +1,116 @@
 nav {
-    height: 75px;
+  height: 75px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 100px;
+  background-color: var(--dark);
+  position: relative;
+  z-index: 100;
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 100%;
+
+    img {
+      width: 50px;
+      height: 50px;
+    }
+
+    h1 {
+      color: var(--accent);
+      font-weight: 700;
+    }
+  }
+
+  .links {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  .burger-menu {
+    display: none;
+    align-items: center;
+    color: var(--accent);
+    font-size: 26px;
+    cursor: pointer;
+  }
+}
+
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: -70%;
+  width: 70%;
+  height: 100vh;
+  background-color: var(--white);
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+  transition: right 0.4s ease;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+
+  &.open {
+    right: 0;
+  }
+
+  .menu-header {
     display: flex;
     justify-content: space-between;
-    padding: 0 100px;
+    align-items: center;
 
-    .logo,
-    form {
-        display: flex;
-        align-items: center;
+    .close {
+      background: none;
+      border: none;
+      font-size: 28px;
+      cursor: pointer;
+      color: var(--text);
     }
+  }
 
-    .logo {
-        height: 100%;
+  ul {
+    list-style: none;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 
-        img {
-            width: 50px;
-            height: 50px;
-            fill: var(--accent);
-        }
+    a {
+      text-decoration: none;
+      font-size: 18px;
+      color: var(--text);
+      transition: 0.3s;
 
-        h1 {
-            color: var(--accent);
-        }
+      &:hover {
+        color: var(--accent);
+      }
     }
+  }
 
-    form {
-        gap: 10px;
-        display: flex;
-        align-items: center;
+  .menu-footer {
+    margin-top: auto;
+    padding-top: 30px;
+  }
+}
 
-        input {
-            width: 300px;
-            padding: 10px;
-            border-radius: 50pc;
-            border: 1px solid var(--grey);
-            background-color: var(--white);
-        }
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 999;
+  animation: fadeIn 0.3s ease;
+}
 
-        button {
-            width: 35px;
-            height: 35px;
-            border-radius: 50pc;
-            background-color: var(--accent);
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            svg {
-                fill: white;
-                width: 18px;
-                height: 18px;
-                background-color: inherit;
-            }
-        }
-
-        .search-results {
-            position: absolute;
-            top: 75px;
-            width: 300px;
-            background-color: var(--white);
-            border: 1px solid var(--grey);
-            border-radius: 10px;
-            max-height: 300px;
-            overflow-y: auto;
-            z-index: 100;
-            padding: 10px 15px;
-
-            li {
-                list-style: none;
-
-                p {
-                    display: block;
-                    color: var(--text);
-                    text-decoration: none;
-                    font-family: var(--open-sans);
-                    transition: .3s;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    max-width:100% ;
-
-                    &:hover {
-                        color: var(--accent);
-                    }
-                }
-            }
-        }
-    }
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @media screen and (max-width: 1441px) {
@@ -97,8 +119,30 @@ nav {
   }
 }
 
-@media screen and (max-width: 751px) {
+@media screen and (max-width: 1025px) {
+  nav {
+    .links {
+      display: none;
+    }
+
+    .burger-menu {
+      display: flex;
+    }
+  }
+}
+
+@media screen and (max-width:769px) {
     nav{
-        padding: 0 25px;
+        padding: 0 20px;
+        .logo{
+            gap: 5px;
+            img{
+                width: 40px;
+                height: 40px;
+            }
+            h1{
+                font-size: 1.5rem;
+            }
+        }
     }
 }

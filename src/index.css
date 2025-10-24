@@ -72,7 +72,26 @@ button {
   }
 }
 
-.app{
+.app {
   max-width: 1920px;
   margin: 0 auto;
+}
+
+li {
+  list-style: none;
+}
+
+.burger-menu {
+  display: none;
+}
+
+.donat {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 10px 15px;
+  background-color: var(--accent);
+  border-radius: 15px;
+  color: var(--white);
+  transition: 0.3s;
 }
