@@ -35,7 +35,7 @@ const MainSection = ({ posts, isDetailPage }) => {
   const lastPost = posts[posts.length - 1];
 
   const selectedPost = posts.find((p) => p.id === Number(id));
-
+  
   return (
     <section className="main-section">
       <div className="left">

@@ -7,6 +7,15 @@ const RightPosts = ({ randomPost, lastPost }) => {
     return <div className="rightposts">Yuklanmoqda...</div>;
   }
 
+  const stripHTML = (html) => {
+    const div = document.createElement("div");
+    div.innerHTML = html;
+    return div.textContent || div.innerText || "";
+  };
+
+  const cleanRandomDesc = stripHTML(randomPost.description || "");
+  const cleanLastDesc = stripHTML(lastPost.description || "");
+
   return (
     <div className="rightposts">
       <div className="telegram shadow-elegant">
@@ -35,9 +44,9 @@ const RightPosts = ({ randomPost, lastPost }) => {
           <h2>Random Post</h2>
         </div>
 
-        {randomPost.img && (
+        {randomPost.file && (
           <div className="img">
-            <img src={randomPost.img} alt={randomPost.title} />
+            <img src={randomPost.file} alt={randomPost.title} />
           </div>
         )}
 
@@ -48,7 +57,9 @@ const RightPosts = ({ randomPost, lastPost }) => {
         </div>
         <div className="text">
           <p>
-            {randomPost.description}
+            {cleanRandomDesc.length > 200
+              ? cleanRandomDesc.slice(0, 200) + "..."
+              : cleanRandomDesc}
           </p>
         </div>
       </div>
@@ -58,9 +69,9 @@ const RightPosts = ({ randomPost, lastPost }) => {
           <h2>Oxirgi Post</h2>
         </div>
 
-        {lastPost.img && (
+        {lastPost.file && (
           <div className="img">
-            <img src={lastPost.img} alt={lastPost.title} />
+            <img src={lastPost.file} alt={lastPost.title} />
           </div>
         )}
 
@@ -71,7 +82,9 @@ const RightPosts = ({ randomPost, lastPost }) => {
         </div>
         <div className="text">
           <p>
-            {lastPost.description}
+            {cleanLastDesc.length > 200
+              ? cleanLastDesc.slice(0, 200) + "..."
+              : cleanLastDesc}
           </p>
         </div>
       </div>
