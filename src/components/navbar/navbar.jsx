@@ -5,10 +5,28 @@ import { PiMoneyDuotone } from "react-icons/pi";
 import SearchBar from '../searchbar/searchbar.jsx';
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoClose } from "react-icons/io5";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function Navbar({ posts }) {
     const [menuOpen, setMenuOpen] = useState(false);
+
+
+    useEffect(() => {
+        if (menuOpen) {
+            document.body.style.overflow = "hidden";
+            document.body.style.position = "fixed";
+            document.body.style.width = "100%";
+        } else {
+            document.body.style.overflow = "";
+            document.body.style.position = "";
+            document.body.style.width = "";
+        }
+        return () => {
+            document.body.style.overflow = "";
+            document.body.style.position = "";
+            document.body.style.width = "";
+        };
+    }, [menuOpen]);
 
     return (
         <>
