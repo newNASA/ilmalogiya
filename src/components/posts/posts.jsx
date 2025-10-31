@@ -5,9 +5,16 @@ import "./posts.scss";
 const Posts = ({ posts }) => {
 
   const stripHTML = (html) => {
+    if (!html) return "";
+    html = html
+      .replace(/<br\s*\/?>/gi, "\n")
+      .replace(/<\/p>/gi, "\n")
+      .replace(/<\/div>/gi, "\n");
+    
     const div = document.createElement("div");
     div.innerHTML = html;
-    return div.textContent || div.innerText || "";
+    const text = div.textContent || div.innerText || "";
+    return text.replace(/\s+/g, " ").trim();
   };
 
   return (

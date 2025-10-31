@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { MdOutlineDateRange } from "react-icons/md";
 import { FaRegEdit, FaRegEye } from "react-icons/fa";
+import { FaArrowLeftLong } from "react-icons/fa6";
 import "./postDetail.scss";
 
 const PostDetail = ({ post }) => {
@@ -69,7 +70,7 @@ const PostDetail = ({ post }) => {
             />
 
             <Link to="/" className="back-btn">
-                ⬅ Bosh sahifaga
+                <FaArrowLeftLong /> Bosh sahifaga
             </Link>
         </div>
     );
