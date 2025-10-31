@@ -1,17 +1,12 @@
 import { Link } from "react-router-dom";
 import { BsTelegram } from "react-icons/bs";
 import "./rightposts.scss";
+import { stripHTML } from "../../utils/stripHTML";
 
 const RightPosts = ({ randomPost, lastPost }) => {
   if (!randomPost || !lastPost) {
     return <div className="rightposts">Yuklanmoqda...</div>;
   }
-
-  const stripHTML = (html) => {
-    const div = document.createElement("div");
-    div.innerHTML = html;
-    return div.textContent || div.innerText || "";
-  };
 
   const cleanRandomDesc = stripHTML(randomPost.description || "");
   const cleanLastDesc = stripHTML(lastPost.description || "");

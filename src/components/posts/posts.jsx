@@ -1,22 +1,10 @@
 import { Link } from "react-router-dom";
 import { FaArrowRightLong } from "react-icons/fa6";
 import "./posts.scss";
+import NoPost from "../nopost/nopost.jsx";
+import { stripHTML } from "../../utils/stripHTML.jsx";
 
 const Posts = ({ posts }) => {
-
-  const stripHTML = (html) => {
-    if (!html) return "";
-    html = html
-      .replace(/<br\s*\/?>/gi, "\n")
-      .replace(/<\/p>/gi, "\n")
-      .replace(/<\/div>/gi, "\n");
-    
-    const div = document.createElement("div");
-    div.innerHTML = html;
-    const text = div.textContent || div.innerText || "";
-    return text.replace(/\s+/g, " ").trim();
-  };
-
   return (
     <div className="posts">
       {posts.length > 0 ? (
@@ -63,7 +51,7 @@ const Posts = ({ posts }) => {
           );
         })
       ) : (
-        <p>No posts found</p>
+        <NoPost />
       )}
     </div>
   );
