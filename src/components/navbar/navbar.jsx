@@ -10,7 +10,6 @@ import { useState, useEffect } from 'react';
 function Navbar({ posts }) {
     const [menuOpen, setMenuOpen] = useState(false);
 
-
     useEffect(() => {
         if (menuOpen) {
             document.body.style.overflow = "hidden";
