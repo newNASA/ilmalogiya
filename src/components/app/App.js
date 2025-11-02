@@ -1,3 +1,4 @@
+// import { useEffect } from "react"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Loader from "../loader/loader"
 import Navbar from "../navbar/navbar"
@@ -10,6 +11,13 @@ function App() {
 
   if (loading) return <Loader />
   if (error) return <div className="error">Xatolik: {error}</div>
+
+  // useEffect(() => {
+  //   window.scrollTo({
+  //     top: 0,
+  //   behavior: "smooth",
+  //   });
+  // }, []);
 
   return (
     <Router>

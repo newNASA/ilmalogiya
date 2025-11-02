@@ -1,0 +1,37 @@
+.tags-loading {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+
+  .text-loader {
+    width: 80px;
+    height: 24px;
+    display: inline-block;
+    position: relative;
+    background: var(--white);
+    border-radius: 50pc;
+    overflow: hidden;
+  }
+
+  .text-loader::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -50%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+    animation: shimmer 1.2s infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      left: -50%;
+    }
+
+    100% {
+      left: 100%;
+    }
+  }
+
+}

@@ -1,10 +1,11 @@
 import "./tags.scss";
 import { useTagsQuery } from "../../hooks/useTagsQuery";
+import TagsLoading from "../tagsLoading/tagsLoading"
 
 const Tags = ({ selectedTag, setSelectedTag }) => {
   const { tags, loading, error } = useTagsQuery();
 
-  if (loading) return <div>Loading tags...</div>;
+  if (loading) return <TagsLoading />;
   if (error) return <div className="error">Error loading tags: {error}</div>;
 
   return (

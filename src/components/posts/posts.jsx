@@ -3,23 +3,42 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import "./posts.scss";
 import NoPost from "../nopost/nopost.jsx";
 import { stripHTML } from "../../utils/stripHTML.jsx";
+import { motion } from "framer-motion"; // 🧠 Qo‘shildi
 
 const Posts = ({ posts }) => {
   return (
     <div className="posts">
       {posts.length > 0 ? (
         posts.map((post) => {
-          const hasImg = !!post.file;
+          const hasFile = !!post.file;
           const cleanDescription = stripHTML(post.description);
+          const isVideo = hasFile && /\.(mp4|webm|ogg)$/i.test(post.file);
 
           return (
             <div
-              className={`post_item${hasImg ? "" : " post_item--noimg"} shadow-elegant`}
+              className={`post_item${hasFile ? "" : " post_item--noimg"} shadow-elegant`}
               key={post.id || post.title}
             >
-              {hasImg && (
+              {hasFile && (
                 <div className="post_left">
-                  <img src={post.file} alt={post.title} />
+                  <Link to={`/posts/${post.id}`}>
+                    {isVideo ? (
+                      <motion.video
+                        layoutId={`media-${post.id}`} // 🪄 Hero ID
+                        muted
+                        preload="metadata"
+                        style={{ pointerEvents: "none" }} // video ishlamasligi uchun
+                      >
+                        <source src={post.file} type="video/mp4" />
+                      </motion.video>
+                    ) : (
+                      <motion.img
+                        layoutId={`media-${post.id}`} // 🪄 Hero ID
+                        src={post.file}
+                        alt={post.title}
+                      />
+                    )}
+                  </Link>
                 </div>
               )}
 
