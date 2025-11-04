@@ -24,8 +24,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            position: relative; 
-            overflow: hidden; 
+            position: relative;
+            overflow: hidden;
             border-radius: 15px 0 0 15px;
 
             img,
@@ -95,7 +95,8 @@
                 height: 250px; // yoki kerakli balandlik
                 border-radius: 15px 15px 0 0; // faqat yuqori qismda
 
-                img, video {
+                img,
+                video {
                     border-radius: 15px 15px 0 0;
                 }
             }

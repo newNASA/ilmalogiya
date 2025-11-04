@@ -1,9 +1,11 @@
 import "./tags.scss";
 import { useTagsQuery } from "../../hooks/useTagsQuery";
-import TagsLoading from "../tagsLoading/tagsLoading"
+import TagsLoading from "../tagsLoading/tagsLoading";
+import { memo } from "react";
 
-const Tags = ({ selectedTag, setSelectedTag }) => {
+const Tags = ({ selectedTag, onTagChange }) => {
   const { tags, loading, error } = useTagsQuery();
+  const safeTags = Array.isArray(tags?.results) ? tags.results : [];
 
   if (loading) return <TagsLoading />;
   if (error) return <div className="error">Error loading tags: {error}</div>;
@@ -11,16 +13,15 @@ const Tags = ({ selectedTag, setSelectedTag }) => {
   return (
     <div className="tags">
       <button
-        onClick={() => setSelectedTag("all")}
+        onClick={() => onTagChange("all")}
         className={selectedTag === "all" ? "active" : ""}
       >
         Hammasi
       </button>
-
-      {tags.map((tag) => (
+      {safeTags.map((tag) => (
         <button
           key={tag.id}
-          onClick={() => setSelectedTag(tag.name)}
+          onClick={() => onTagChange(tag.name)}
           className={selectedTag === tag.name ? "active" : ""}
         >
           {tag.name}
@@ -30,4 +31,4 @@ const Tags = ({ selectedTag, setSelectedTag }) => {
   );
 };
 
-export default Tags;
+export default memo(Tags);

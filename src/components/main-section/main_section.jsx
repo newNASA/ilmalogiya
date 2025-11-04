@@ -1,60 +1,94 @@
+// components/main-section/main_section.jsx
+import { useState, useEffect, useCallback, memo } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { useSidebarData } from "../../hooks/useSideBarData";
+import { usePostsQuery } from "../../hooks/usePostsQuery";
+import { useGetOneQuery } from "../../hooks/useGetOneQuery";
 import "./main_section.scss";
-import { useParams } from "react-router-dom";
-import { useState, useMemo } from "react";
 import Tags from "../tags/tags";
 import Posts from "../posts/posts";
-import RightPosts from "../rightPosts/rightposts";
-import Pagination from "../pagination/pagination";
 import PostDetail from "../postDetail/postDetail";
+import Pagination from "../pagination/pagination";
+import RightPosts from "../rightPosts/rightposts";
+import Loader from "../loader/loader";
 
-const MainSection = ({ posts, isDetailPage }) => {
+const MemoizedTags = memo(Tags);
+const MemoizedRightPosts = memo(RightPosts);
+
+const MainSection = () => {
   const { id } = useParams();
-  const [selectedTag, setSelectedTag] = useState("all");
+  const navigate = useNavigate();
+
   const [currentPage, setCurrentPage] = useState(1);
-  const postsPerPage = 10;
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedTag, setSelectedTag] = useState("all");
 
-  const filteredPosts =
-    selectedTag === "all" ? posts : posts.filter((p) => p.tags.includes(selectedTag));
-
-  const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
-  const currentPosts = filteredPosts.slice(
-    (currentPage - 1) * postsPerPage,
-    currentPage * postsPerPage
+  // Postlar
+  const { posts: allPosts,  error: postsError, pagination } = usePostsQuery(
+    currentPage,
+    searchQuery,
+    "all"
   );
 
-  const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
-  const handleTagChange = (tag) => {
+  // Detail — faqat ID bo‘lsa
+  const { post: detailedPost, loading: detailLoading, error: detailError } = useGetOneQuery(id);
+
+  // Sidebar
+  const { randomPost, lastPost } = useSidebarData();
+
+  const handleTagChange = useCallback((tag) => {
     setSelectedTag(tag);
     setCurrentPage(1);
-  };
+    navigate("/"); // Bosh sahifaga
+  }, [navigate]);
 
-  const randomPost = useMemo(
-    () => posts[Math.floor(Math.random() * posts.length)],
-    [posts]
-  );
-  const lastPost = posts[posts.length - 1];
+  useEffect(() => {
+    const handleSearch = () => {
+      setSearchQuery(localStorage.getItem("searchQuery") || "");
+      setCurrentPage(1);
+    };
+    window.addEventListener("searchChanged", handleSearch);
+    return () => window.removeEventListener("searchChanged", handleSearch);
+  }, []);
 
-  const selectedPost = posts.find((p) => p.id === Number(id));
-  
+  // Loading
+
+  if (postsError) return <div className="error">Xatolik: {postsError}</div>;
+
   return (
     <section className="main-section">
       <div className="left">
-        {isDetailPage && selectedPost ? (
-          <PostDetail post={selectedPost} />
+        <MemoizedTags selectedTag={selectedTag} onTagChange={handleTagChange} />
+
+        {id ? (
+          detailLoading ? (
+            <Loader />
+          ) : detailError ? (
+            <div className="error">{detailError}</div>
+          ) : detailedPost ? (
+            <PostDetail post={detailedPost} />
+          ) : (
+            <p>Post topilmadi</p>
+          )
         ) : (
           <>
-            <Tags selectedTag={selectedTag} setSelectedTag={handleTagChange} />
-            <Posts posts={currentPosts} />
+            <Posts
+              allPosts={allPosts}
+              selectedTag={selectedTag}
+              searchQuery={searchQuery}
+              handleTagClick={handleTagChange}
+            />
             <Pagination
-              totalPages={totalPages}
+              pagination={pagination}
               currentPage={currentPage}
-              onPageChange={handlePageChange}
+              onPageChange={setCurrentPage}
             />
           </>
         )}
       </div>
+
       <div className="right">
-        <RightPosts randomPost={randomPost} lastPost={lastPost} />
+        <MemoizedRightPosts randomPost={randomPost} lastPost={lastPost} />
       </div>
     </section>
   );

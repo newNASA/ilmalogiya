@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { BsTelegram } from "react-icons/bs";
 import "./rightposts.scss";
 import { stripHTML } from "../../utils/stripHTML";
+import { memo } from "react";
 
 const RightPosts = ({ randomPost, lastPost }) => {
   if (!randomPost || !lastPost) {
@@ -19,8 +20,8 @@ const RightPosts = ({ randomPost, lastPost }) => {
         </div>
         <div className="text">
           <p>
-            Eng so'nggi yangiliklar, maqolalar va texnologiyalar haqida birinchi
-            bo'lib xabardor bo'ling!
+            Eng so‘nggi yangiliklar, maqolalar va texnologiyalar haqida birinchi
+            bo‘lib xabardor bo‘ling!
           </p>
         </div>
         <div className="link">
@@ -29,7 +30,7 @@ const RightPosts = ({ randomPost, lastPost }) => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <BsTelegram /> Kanalga qo'shilish
+            <BsTelegram /> Kanalga qo‘shilish
           </a>
         </div>
       </div>
@@ -38,13 +39,11 @@ const RightPosts = ({ randomPost, lastPost }) => {
         <div className="top">
           <h2>Random Post</h2>
         </div>
-
         {randomPost.file && (
           <div className="img">
             <img src={randomPost.file} alt={randomPost.title} />
           </div>
         )}
-
         <div className="title">
           <Link to={`/posts/${randomPost.id}`}>
             <h3>{randomPost.title}</h3>
@@ -63,13 +62,11 @@ const RightPosts = ({ randomPost, lastPost }) => {
         <div className="top">
           <h2>Oxirgi Post</h2>
         </div>
-
         {lastPost.file && (
           <div className="img">
             <img src={lastPost.file} alt={lastPost.title} />
           </div>
         )}
-
         <div className="title">
           <Link to={`/posts/${lastPost.id}`}>
             <h3>{lastPost.title}</h3>
@@ -87,4 +84,4 @@ const RightPosts = ({ randomPost, lastPost }) => {
   );
 };
 
-export default RightPosts;
+export default memo(RightPosts);
