@@ -24,7 +24,7 @@ const MainSection = () => {
   const [selectedTag, setSelectedTag] = useState("all");
 
   // Postlar
-  const { posts: allPosts,  error: postsError, pagination } = usePostsQuery(
+  const { posts: allPosts, error: postsError, pagination } = usePostsQuery(
     currentPage,
     searchQuery,
     "all"
@@ -58,7 +58,6 @@ const MainSection = () => {
   return (
     <section className="main-section">
       <div className="left">
-        <MemoizedTags selectedTag={selectedTag} onTagChange={handleTagChange} />
 
         {id ? (
           detailLoading ? (
@@ -72,6 +71,7 @@ const MainSection = () => {
           )
         ) : (
           <>
+            <MemoizedTags selectedTag={selectedTag} onTagChange={handleTagChange} />
             <Posts
               allPosts={allPosts}
               selectedTag={selectedTag}
