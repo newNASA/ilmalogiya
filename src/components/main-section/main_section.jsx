@@ -30,11 +30,9 @@ const MainSection = () => {
     "all"
   );
 
-  // Detail — faqat ID bo‘lsa
   const { post: detailedPost, loading: detailLoading, error: detailError } = useGetOneQuery(id);
 
-  // Sidebar
-  const { randomPost, lastPost } = useSidebarData();
+  const { randomPost, lastPost, loading, error } = useSidebarData();
 
   const handleTagChange = useCallback((tag) => {
     setSelectedTag(tag);
@@ -88,7 +86,17 @@ const MainSection = () => {
       </div>
 
       <div className="right">
-        <MemoizedRightPosts randomPost={randomPost} lastPost={lastPost} />
+        {error ? (
+          <div className="error p-4 bg-red-100 text-red-700 rounded">
+            <strong>Sidebar xato:</strong> {error}
+            <br />
+            <small>Backendda /posts/random/ yoki /posts/latest/ ishlamayapti</small>
+          </div>
+        ) : loading ? (
+          <div className="text-center py-8">Yuklanmoqda...</div>
+        ) : (
+          <MemoizedRightPosts randomPost={randomPost} lastPost={lastPost} />
+        )}
       </div>
     </section>
   );
