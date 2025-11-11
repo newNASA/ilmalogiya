@@ -2,6 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './components/app/App';
+import ReactGA from 'react-ga4';
+
+ReactGA.initialize("G-0LEVT3LRD")
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
