@@ -37,7 +37,7 @@ const MainSection = () => {
   const handleTagChange = useCallback((tag) => {
     setSelectedTag(tag);
     setCurrentPage(1);
-    navigate("/"); // Bosh sahifaga
+    navigate("/"); 
   }, [navigate]);
 
   useEffect(() => {

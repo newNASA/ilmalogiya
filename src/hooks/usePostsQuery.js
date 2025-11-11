@@ -25,6 +25,7 @@ export function usePostsQuery(page = 1, search = "", tag = "all") {
           count: data.count,
           next: data.next,
           previous: data.previous,
+          totalPages: data.count ? Math.ceil(data.count / 10) : 1,
         });
       } catch (err) {
         setError(err.message);
