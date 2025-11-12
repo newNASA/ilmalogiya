@@ -14,7 +14,7 @@ const Tags = ({ selectedTag, onTagChange }) => {
     ? tags.data
     : [];
 
-  if (loading) return <TagsLoading />;
+  if (loading) return <TagsLoading count={5} />;
   if (error) return <div className="error">Error loading tags: {error}</div>;
 
   return (

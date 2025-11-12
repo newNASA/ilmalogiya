@@ -5,10 +5,6 @@ import { stripHTML } from "../../utils/stripHTML";
 import { memo } from "react";
 
 const RightPosts = ({ randomPost, lastPost }) => {
-  if (!randomPost || !lastPost) {
-    return <div className="rightposts">Yuklanmoqda...</div>;
-  }
-
   const cleanRandomDesc = stripHTML(randomPost.description || "");
   const cleanLastDesc = stripHTML(lastPost.description || "");
 

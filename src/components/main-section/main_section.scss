@@ -4,7 +4,7 @@
   display: flex;
   gap: 30px;
   margin-bottom: 50px;
-  
+
   .left {
     overflow: hidden;
     width: 70%;
@@ -13,7 +13,7 @@
   .right {
     width: 30%;
     position: sticky;
-    align-self: flex-start; 
+    align-self: flex-start;
     top: 20px;
   }
 }
@@ -27,8 +27,9 @@
 @media screen and (max-width: 1350px) {
   .main-section {
     flex-direction: column;
-    
-    .left, .right {
+
+    .left,
+    .right {
       width: 100%;
     }
 
@@ -40,13 +41,137 @@
 }
 
 @media screen and (max-width: 751px) {
-    .main-section{
-        padding: 0 25px;
-    }
+  .main-section {
+    padding: 0 25px;
+  }
 }
 
 @media screen and (max-width:768px) {
-    .main-section{
-        padding: 0 20px;
-    } 
+  .main-section {
+    padding: 0 20px;
+  }
+}
+
+.onload {
+  p {
+    width: 90%;
+    height: 20px;
+    background: var(--background);
+    position: relative;
+    overflow: hidden;
+    border-radius: 5px;
+    margin-bottom: 6px !important;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -50%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      animation: shimmer 1.5s infinite;
+    }
+  }
+
+  .h2 {
+    width: 70%;
+    height: 30px;
+    background: var(--background);
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-bottom: 10px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -50%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      animation: shimmer 1.5s infinite;
+    }
+  }
+
+  .title {
+    width: 80%;
+    height: 25px;
+    background: var(--background);
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-bottom: 10px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -50%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      animation: shimmer 1.5s infinite;
+    }
+  }
+
+  .img {
+    width: 100%;
+    height: 120px;
+    background: var(--background);
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-bottom: 10px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -50%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      animation: shimmer 1.5s infinite;
+    }
+  }
+  .p {
+    width: 70%;
+  }
+
+  .telegram {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    .link {
+      width: 60%;
+      height: 40px;
+      background: var(--background);
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+      margin-top: 10px;
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -50%;
+        width: 50%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+        animation: shimmer 1.5s infinite;
+      }
+    }
+  }
+
+  .randompost {
+    .h2 {
+      width: 50%;
+    }
+  }
+
 }

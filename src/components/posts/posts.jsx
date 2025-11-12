@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { FaArrowRightLong } from "react-icons/fa6";
 import "./posts.scss";
-import NoPost from "../nopost/nopost.jsx";
 import { stripHTML } from "../../utils/stripHTML.jsx";
 import { useMemo } from "react";
 
@@ -10,6 +9,7 @@ const Posts = ({
   selectedTag = "all",
   searchQuery = "",
   handleTagClick,
+  loading=false,
 }) => {
   const filteredPosts = useMemo(() => {
     let filtered = allPosts;
@@ -33,7 +33,7 @@ const Posts = ({
   }, [allPosts, selectedTag, searchQuery]);
 
   if (!Array.isArray(filteredPosts) || filteredPosts.length === 0) {
-    return <NoPost />;
+    return <h1 className="postloading-message">Hech qanday post topilmadi</h1>;
   }
 
   return (

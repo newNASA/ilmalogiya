@@ -1,9 +1,9 @@
 import "./tagsLoading.scss"
 
-const Test = () => {
+const Test = ({ count }) => {
     return (
         <div className="tags-loading">
-            {[...Array(5)].map((_, i) => (
+            {[...Array(count)].map((_, i) => (
                 <span key={i} class="text-loader"></span>
             ))}
         </div>
