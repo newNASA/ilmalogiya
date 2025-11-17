@@ -52,12 +52,10 @@ const Posts = ({
               <div className="post_left">
                 <Link to={`/posts/${post.id}`}>
                   {isVideo ? (
-                    // Animatsiya o‘chirildi — oddiy video
                     <video muted preload="metadata" playsInline>
                       <source src={post.file} type="video/mp4" />
                     </video>
                   ) : (
-                    // Animatsiya o‘chirildi — oddiy rasm
                     <img
                       src={post.file}
                       alt={post.title}

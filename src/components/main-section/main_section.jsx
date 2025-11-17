@@ -54,13 +54,14 @@ const MainSection = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedTag, setSelectedTag] = useState("all");
 
-  // ✅ postsLoading ni hookdan olamiz
   const {
     posts: allPosts,
     loading: postsLoading,
     error: postsError,
     pagination,
-  } = usePostsQuery(currentPage, searchQuery, "all");
+  } = usePostsQuery(currentPage, searchQuery, selectedTag);
+
+  console.log(allPosts)
 
   const {
     post: detailedPost,
@@ -88,7 +89,6 @@ const MainSection = () => {
     return () => window.removeEventListener("searchChanged", handleSearch);
   }, []);
 
-  // ✅ Xatolik
   if (postsError)
     return <div className="error">Xatolik: {postsError}</div>;
 
