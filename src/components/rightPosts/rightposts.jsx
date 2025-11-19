@@ -3,6 +3,7 @@ import { BsTelegram } from "react-icons/bs";
 import "./rightposts.scss";
 import { stripHTML } from "../../utils/stripHTML";
 import { memo } from "react";
+import { IoLogoInstagram } from "react-icons/io5";
 
 const RightPosts = ({ randomPost, lastPost }) => {
   const cleanRandomDesc = stripHTML(randomPost.description || "");
@@ -27,6 +28,13 @@ const RightPosts = ({ randomPost, lastPost }) => {
             rel="noopener noreferrer"
           >
             <BsTelegram /> Kanalga qo‘shilish
+          </a>
+          <a
+            href="https://www.instagram.com/ilmalogiya/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <IoLogoInstagram /> Instagram
           </a>
         </div>
       </div>

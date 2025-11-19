@@ -4,6 +4,16 @@
     flex-direction: column;
     gap: 25px;
 
+    .link{
+        display: inline-flex;
+        flex-direction: column;
+        gap: 5px;
+        a{
+            display: flex;
+            justify-content: center;
+        }
+    }
+
     .lastpost,
     .randompost,
     .telegram {
