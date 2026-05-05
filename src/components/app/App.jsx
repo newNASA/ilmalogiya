@@ -26,7 +26,7 @@ function App() {
         <Route path="/posts/:slug" element={<MainSection />} />
         <Route path="/quotes" element={<Quotes />} />
         <Route path="/quotes/author/:slug" element={<Author />} />
-        <Route path="/quotes/:slug" element={<SingleQuote />} />
+        <Route path="/quotes/:slug" element={<Quotes />} />
       </Routes>
       <Footer />
     </div>

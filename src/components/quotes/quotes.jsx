@@ -1,5 +1,5 @@
 import "./quotes.scss";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { LuSlidersHorizontal } from "react-icons/lu";
 import { IoClose } from "react-icons/io5";
 import { memo, useState } from "react";
@@ -8,8 +8,12 @@ import { useQuotesPageData } from "../../hooks/useQuotesPageData";
 import QuotesCards from "./elements/quotes_cards";
 import QuotesLoading from "./elements/quotesLoading";
 import RightPosts from "../rightPosts/rightposts";
+import Pagination from "../pagination/pagination";
+import SingleQuoteLoading from "./elements/singlequoteloading";
+import SingleQuote from "./SingleQuote";
 
-const onLoad = () => (
+// OnLoad komponentini funksiya sifatida emas, komponent sifatida e'lon qilamiz
+const OnLoad = () => (
     <div className="onload rightposts">
         <div className="onload-telegram telegram">
             <div className="h2"></div><p></p><p className="p"></p><div className="link"></div>
@@ -52,69 +56,103 @@ const Quotes = () => {
         setCurrentPage(1);
     };
 
+    // Custom hookdan hamma kerakli o'zgaruvchilarni olamiz
+    // DIQQAT: quoteLoading va quoteError hook ichida borligiga ishonch hosil qiling
     const {
         tags,
-        quotes,
+        quotes = [],
         randomPost,
         latestPost,
+        quoteData,
+        quoteLoading,
+        quoteError,
         pagination,
         loading: homeLoading,
         error: homeError,
-    } = useQuotesPageData(currentPage, searchQuery, selectedTags);
+    } = useQuotesPageData(currentPage, searchQuery, selectedTags, slug);
 
     return (
         <section className="main-section quotes-page">
             <div className="left">
-                <div className="search-filterbar">
-                    <div className="search-filter-bar">
-                        <form className="search-form" onSubmit={handleSearchSubmit}>
-                            <input
-                                type="search"
-                                placeholder="Qidirish..."
-                                value={inputValue}
-                                onChange={(e) => setInputValue(e.target.value)}
-                            />
-                        </form>
+                {slug ? (
+                    // Agar slug bo'lsa, bitta iqtibosni ko'rsatamiz
+                    quoteLoading ? (
+                        <SingleQuoteLoading />
+                    ) : quoteError ? (
+                        <div className="error">{quoteError}</div>
+                    ) : (
+                        <SingleQuote slug={slug} initialQuote={quoteData} />
+                    )
+                ) : (
+                    // Agar slug bo'lmasa, qidiruv va barcha iqtiboslar
+                    <>
+                        <div className="search-filterbar">
+                            <div className="search-filter-bar">
+                                <form className="search-form" onSubmit={handleSearchSubmit}>
+                                    <input
+                                        type="search"
+                                        placeholder="Qidirish..."
+                                        value={inputValue}
+                                        onChange={(e) => setInputValue(e.target.value)}
+                                    />
+                                </form>
 
-                        <button
-                            className={`filter-btn ${selectedTags.length > 0 ? "active" : ""}`}
-                            onClick={() => setDrawerOpen((prev) => !prev)}
-                            title="Teglar bo'yicha filter"
-                        >
-                            <LuSlidersHorizontal />
+                                <button
+                                    className={`filter-btn ${selectedTags.length > 0 ? "active" : ""}`}
+                                    onClick={() => setDrawerOpen((prev) => !prev)}
+                                    title="Teglar bo'yicha filter"
+                                >
+                                    <LuSlidersHorizontal />
+                                    {selectedTags.length > 0 && (
+                                        <span className="filter-badge">{selectedTags.length}</span>
+                                    )}
+                                </button>
+                            </div>
+
                             {selectedTags.length > 0 && (
-                                <span className="filter-badge">{selectedTags.length}</span>
+                                <div className="active-tag-indicator">
+                                    <span style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', alignItems: 'center' }}>
+                                        Teglar:
+                                        {selectedTags.map((t) => (
+                                            <strong key={t} style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', background: 'var(--background)', padding: '2px 8px', borderRadius: '50px' }}>
+                                                {t}
+                                                <IoClose
+                                                    style={{ cursor: 'pointer' }}
+                                                    onClick={(e) => { e.stopPropagation(); handleTagChange(t); }}
+                                                />
+                                            </strong>
+                                        ))}
+                                    </span>
+                                    <button onClick={() => handleTagChange("all")}>
+                                        <IoClose /> Tozalash
+                                    </button>
+                                </div>
                             )}
-                        </button>
-                    </div>
-
-                    {/* Active tag indicator */}
-                    {selectedTags.length > 0 && (
-                        <div className="active-tag-indicator">
-                            <span style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', alignItems: 'center' }}>
-                                Teglar:
-                                {selectedTags.map((t) => (
-                                    <strong key={t} style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', background: 'var(--background)', padding: '2px 8px', borderRadius: '50px' }}>
-                                        {t}
-                                        <IoClose
-                                            style={{ cursor: 'pointer' }}
-                                            onClick={(e) => { e.stopPropagation(); handleTagChange(t); }}
-                                        />
-                                    </strong>
-                                ))}
-                            </span>
-                            <button onClick={() => handleTagChange("all")}>
-                                <IoClose /> Tozalash
-                            </button>
                         </div>
-                    )}
-                </div>
 
-                <QuotesCards quotes={quotes} />
+                        {homeLoading ? (
+                            <QuotesLoading />
+                        ) : homeError ? (
+                            <div className="error">{homeError}</div>
+                        ) : quotes.length === 0 ? (
+                            <h1 className="postloading-message">Hech qanday iqtibos topilmadi</h1>
+                        ) : (
+                            <>
+                                <QuotesCards quotes={quotes} />
+                                <Pagination
+                                    pagination={pagination}
+                                    currentPage={currentPage}
+                                    onPageChange={setCurrentPage}
+                                />
+                            </>
+                        )}
+                    </>
+                )}
             </div>
+
             <div className="right">
                 {homeLoading ? (
-                    <div className="text-center py-8">{onLoad()}</div>
+                    <div className="text-center py-8"><OnLoad /></div>
                 ) : (
                     <MemoizedRightPosts randomPost={randomPost} lastPost={latestPost} />
                 )}

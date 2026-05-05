@@ -1,21 +1,62 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
-import { useQuoteQuery } from '../../hooks/useQuoteQuery';
+import { Link, useParams } from "react-router-dom";
+import { FaRegCopyright } from "react-icons/fa";
+import { useSingleQuoteQuery } from "../../hooks/useSingleQuoteQuery";
 
-const SingleQuote = () => {
-    const { slug } = useParams();
-    const { quote, loading, error } = useQuoteQuery(slug);
+function SingleQuote({ slug: propSlug, initialQuote }) {
+    const { slug: paramsSlug } = useParams();
+    const slug = propSlug || paramsSlug;
 
-    if (loading) return <div>Yuklanmoqda...</div>;
-    if (error) return <div>Xatolik: {error}</div>;
-    if (!quote) return <div>Hikmatli so'z topilmadi</div>;
+    const { quote: fetchedQuote, loading, error } = useSingleQuoteQuery(initialQuote ? null : slug);
+    const quote = initialQuote || fetchedQuote;
+
+    if (loading && !quote) return <div className="loading">Yuklanmoqda...</div>;
+    if (error && !quote) return <div className="error">Xatolik: {error}</div>;
+    if (!quote) return <div className="not-found">Quote topilmadi</div>;
 
     return (
         <div className="single-quote-page">
-            <q>{quote.text}</q>
-            <p>— {quote.author_name}</p>
+            <div className="single-card shadow-elegant">
+                {/* Author Photo */}
+                <div className="author-img">
+                    {quote.author?.photo ? (
+                        <img
+                            src={quote.author.photo}
+                            alt={quote.author.name}
+                        />
+                    ) : quote.author_photo ? (
+                        <img
+                            src={quote.author_photo}
+                            alt={quote.author_name}
+                        />
+                    ) : null}
+                </div>
+
+                {/* Tags */}
+                {quote.tags && quote.tags.length > 0 && (
+                    <div className="post_tags">
+                        {quote.tags.map((tag, index) => (
+                            <button key={tag.id || tag || index} className="tag-button">
+                                {tag.name || tag}
+                            </button>
+                        ))}
+                    </div>
+                )}
+
+                {/* Quote Text */}
+                <div className="quote-content">
+                    <q className="quote-text">{quote.text}</q>
+                </div>
+
+                {/* Author Info */}
+                <div className="author-details">
+                    <Link to={`/authors/${quote.author?.slug || quote.author_slug}`} className="author-name">
+                        <FaRegCopyright />
+                        <span>{quote.author?.name || quote.author_name}</span>
+                    </Link>
+                </div>
+            </div>
         </div>
     );
-};
+}
 
 export default SingleQuote;

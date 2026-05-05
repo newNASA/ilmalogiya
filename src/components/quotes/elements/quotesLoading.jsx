@@ -6,7 +6,7 @@ function QuotesLoading() {
     return (
         <div className="quotes-loading quotes-list">
             {[...Array(10)].map((_, i) => (
-            <div className="quotes-card">
+            <div key={i} className="quotes-card">
                 <div className="quotes-left">
                     <div className="img"></div>
                 </div>
