@@ -1,6 +1,8 @@
 import { Link, useParams } from "react-router-dom";
 import { FaRegCopyright } from "react-icons/fa";
-import { useSingleQuoteQuery } from "../../hooks/useSingleQuoteQuery";
+import { useSingleQuoteQuery } from "../../../hooks/useSingleQuoteQuery";
+
+import SingleQuoteLoading from "./singlequoteloading";
 
 function SingleQuote({ slug: propSlug, initialQuote }) {
     const { slug: paramsSlug } = useParams();
@@ -9,7 +11,6 @@ function SingleQuote({ slug: propSlug, initialQuote }) {
     const { quote: fetchedQuote, loading, error } = useSingleQuoteQuery(initialQuote ? null : slug);
     const quote = initialQuote || fetchedQuote;
 
-    if (loading && !quote) return <div className="loading">Yuklanmoqda...</div>;
     if (error && !quote) return <div className="error">Xatolik: {error}</div>;
     if (!quote) return <div className="not-found">Quote topilmadi</div>;
 

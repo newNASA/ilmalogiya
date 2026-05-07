@@ -6,7 +6,7 @@ import MainSection from "../main-section/main_section";
 import Footer from "../footer/footer";
 import Quotes from "../quotes/quotes";
 import Author from "../quotes/author";
-import SingleQuote from "../quotes/SingleQuote";
+import SingleQuote from "../quotes/elements/SingleQuote";
 
 function App() {
   const location = useLocation();

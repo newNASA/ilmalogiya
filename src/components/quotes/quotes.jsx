@@ -10,7 +10,7 @@ import QuotesLoading from "./elements/quotesLoading";
 import RightPosts from "../rightPosts/rightposts";
 import Pagination from "../pagination/pagination";
 import SingleQuoteLoading from "./elements/singlequoteloading";
-import SingleQuote from "./SingleQuote";
+import SingleQuote from "./elements/SingleQuote";
 
 // OnLoad komponentini funksiya sifatida emas, komponent sifatida e'lon qilamiz
 const OnLoad = () => (
@@ -56,8 +56,6 @@ const Quotes = () => {
         setCurrentPage(1);
     };
 
-    // Custom hookdan hamma kerakli o'zgaruvchilarni olamiz
-    // DIQQAT: quoteLoading va quoteError hook ichida borligiga ishonch hosil qiling
     const {
         tags,
         quotes = [],
@@ -75,7 +73,6 @@ const Quotes = () => {
         <section className="main-section quotes-page">
             <div className="left">
                 {slug ? (
-                    // Agar slug bo'lsa, bitta iqtibosni ko'rsatamiz
                     quoteLoading ? (
                         <SingleQuoteLoading />
                     ) : quoteError ? (
@@ -84,7 +81,6 @@ const Quotes = () => {
                         <SingleQuote slug={slug} initialQuote={quoteData} />
                     )
                 ) : (
-                    // Agar slug bo'lmasa, qidiruv va barcha iqtiboslar
                     <>
                         <div className="search-filterbar">
                             <div className="search-filter-bar">
