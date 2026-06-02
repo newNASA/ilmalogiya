@@ -103,9 +103,9 @@ function Author() {
                                 </div>
                             </div>
                         </div>
-                        <div className="bio">
+                        <div className="bio post-description">
                             {author?.bio ? (
-                                <p>{author.bio}</p>
+                                <div dangerouslySetInnerHTML={{ __html: author.bio }} />
                             ) : (
                                 <p>Muallif haqida ma'lumot mavjud emas.</p>
                             )}

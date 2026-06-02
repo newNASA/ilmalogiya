@@ -113,6 +113,153 @@
     }
 }
 
+.post-description {
+    margin-top: 20px;
+    color: var(--text);
+    font-size: 1rem;
+    line-height: 1.8;
+
+    p {
+        margin-bottom: 1em;
+        color: var(--text);
+    }
+
+    strong, b {
+        font-weight: 700;
+        color: var(--text);
+    }
+
+    em, i {
+        font-style: italic;
+    }
+
+    u {
+        text-decoration: underline;
+    }
+
+    s, del {
+        text-decoration: line-through;
+        opacity: 0.6;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        color: var(--accent);
+        font-weight: 700;
+        margin-top: 1.4em;
+        margin-bottom: 0.5em;
+        line-height: 1.3;
+    }
+
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.6rem; }
+    h3 { font-size: 1.3rem; }
+    h4 { font-size: 1.1rem; }
+    h5 { font-size: 1rem; }
+    h6 { font-size: 0.9rem; }
+
+    a {
+        color: var(--accent);
+        text-decoration: underline;
+        word-break: break-all;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+
+    ul, ol {
+        padding-left: 1.5em;
+        margin-bottom: 1em;
+
+        li {
+            margin-bottom: 0.4em;
+            line-height: 1.7;
+        }
+    }
+
+    ul li {
+        list-style-type: disc;
+    }
+
+    ol li {
+        list-style-type: decimal;
+    }
+
+    blockquote {
+        border-left: 4px solid var(--accent);
+        margin: 1em 0;
+        padding: 10px 15px;
+        color: var(--accent);
+        font-style: italic;
+        background-color: var(--background);
+        border-radius: 5px;
+
+        p {
+            margin-bottom: 0;
+            color: var(--accent);
+        }
+    }
+
+    code {
+        font-family: 'Cascadia Code', 'Fira Code', monospace;
+        background-color: var(--background);
+        padding: 2px 6px;
+        color: var(--accent);
+        border-radius: 5px;
+        font-size: 0.9em;
+    }
+
+    pre {
+        background-color: var(--background);
+        border-radius: 8px;
+        padding: 16px;
+        overflow-x: auto;
+        margin: 1em 0;
+
+        code {
+            background: none;
+            padding: 0;
+            font-size: 0.875rem;
+            border-radius: 0;
+        }
+    }
+
+    hr {
+        border: none;
+        border-top: 1px solid var(--grey);
+        margin: 1.5em 0;
+    }
+
+    img {
+        max-width: 100%;
+        border-radius: 10px;
+        margin: 10px 0;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1em 0;
+
+        th, td {
+            padding: 10px 14px;
+            border: 1px solid var(--grey);
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        th {
+            background-color: var(--background);
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) td {
+            background-color: var(--background);
+        }
+    }
+}
+
 .author-loading {
     width: 100%;
     background-color: var(--white);
