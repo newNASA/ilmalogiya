@@ -34,7 +34,7 @@
                 color: var(--text);
                 font-size: 1rem;
                 line-height: 1.5;
-                color: var(--grey);
+                color: var(--text);
 
 
                 span {
@@ -52,7 +52,7 @@
                     display: flex;
                     align-items: center;
                     gap: 5px;
-                    color: var(--grey);
+                    color: var(--text);
                     font-size: 14px;
 
                     svg {
@@ -74,7 +74,7 @@
             color: var(--text);
             font-size: 1rem;
             line-height: 1.5;
-            color: var(--grey);
+            color: var(--text);
         }
 
         ul {
@@ -90,7 +90,7 @@
                 border-left: 5px solid var(--accent);
 
                 blockquote {
-                    color: var(--grey);
+                    color: var(--text);
                     text-decoration: italic;
                     font-size: 1rem;
                     line-height: 1.5;
@@ -384,4 +384,4 @@
         }
     }
 }
-
+
