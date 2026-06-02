@@ -1,14 +1,15 @@
 import { FaRegCopyright } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
+import QuotesLoading from "./quotesLoading";
+
 const QuotesCards = ({quotes}) => {
     if (!quotes || quotes.length === 0) {
-        return <div className="no-quotes">Ma'lumot topilmadi</div>;
+        return <QuotesLoading />;
     }
 
-    const url = import.meta.env.VITE_API_MEDIA_URL;
+    console
 
-    console.log(quotes)
     return (
         <div className="quotes-list">
             {quotes.map((quote) =>{
@@ -31,10 +32,10 @@ const QuotesCards = ({quotes}) => {
                         </Link>
                         <p>
                             <FaRegCopyright />
-                            <Link to={`/quotes/author/${quote.author_slug}`}>
+                            <Link to={`/quotes/author/${quote.author_slug}`} className="author-name">
                                 {quote.author_name}
                             </Link>
-                        </p>
+                        </p>    
                     </div>
                 </div>
             )})}

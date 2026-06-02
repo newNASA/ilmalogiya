@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-export const useQuoteQuery = (slug) => {
+export const useSingleQuoteQuery = (slug) => {
   const [quote, setQuote] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -20,7 +20,7 @@ export const useQuoteQuery = (slug) => {
         setLoading(true);
         setError(null);
 
-        const res = await fetch(`${BASE_URL}/quotes/${slug}/`);
+        const res = await fetch(`${BASE_URL}/quotes/quotes/${slug}/`);
         if (!res.ok) throw new Error("Hikmatli so'z topilmadi");
 
         const data = await res.json();

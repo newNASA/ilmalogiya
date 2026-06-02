@@ -81,7 +81,7 @@ function Navbar() {
             </Link>
           </li>
           <li>
-            <Link to="/iqtiboslar" onClick={() => setMenuOpen(false)}>
+            <Link to="/quotes" onClick={() => setMenuOpen(false)}>
               <FaQuoteRight /> Iqtiboslar
             </Link>
           </li>

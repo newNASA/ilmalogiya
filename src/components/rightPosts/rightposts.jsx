@@ -11,7 +11,6 @@ const RightPosts = ({ randomPost, lastPost }) => {
   const cleanLastDesc = stripHTML(lastPost?.description || "");
   const url = import.meta.env.VITE_API_MEDIA_URL;
 
-
   return (
     <div className="rightposts">
       <div className="telegram shadow-elegant">
@@ -30,7 +29,7 @@ const RightPosts = ({ randomPost, lastPost }) => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <BsTelegram /> Kanalga qo‘shilish
+            <BsTelegram /> Telegram
           </a>
           <a
             href="https://www.instagram.com/ilmalogiya/"
@@ -49,7 +48,10 @@ const RightPosts = ({ randomPost, lastPost }) => {
           </div>
           {randomPost.file && (
             <div className="img">
-              <img src={url + randomPost.file} alt={randomPost.title} />
+              <img 
+                src={randomPost.file.startsWith("http") ? randomPost.file : url + randomPost.file} 
+                alt={randomPost.title} 
+              />
             </div>
           )}
           <div className="post_tags">
@@ -92,7 +94,10 @@ const RightPosts = ({ randomPost, lastPost }) => {
           </div>
           {lastPost.file && (
             <div className="img">
-              <img src={url + lastPost.file} alt={lastPost.title} />
+              <img 
+                src={lastPost.file.startsWith("http") ? lastPost.file : url + lastPost.file} 
+                alt={lastPost.title} 
+              />
             </div>
           )}
           <div className="post_tags">

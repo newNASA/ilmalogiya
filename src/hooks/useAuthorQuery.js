@@ -20,7 +20,8 @@ export const useAuthorQuery = (slug) => {
         setLoading(true);
         setError(null);
 
-        const res = await fetch(`${BASE_URL}/authors/${slug}/`);
+        const res = await fetch(`${BASE_URL}/quotes/authors/${slug}/`);
+        console.log("Fetching author:", slug, "Response status:", res.status);
         if (!res.ok) throw new Error("Muallif topilmadi");
 
         const data = await res.json();
