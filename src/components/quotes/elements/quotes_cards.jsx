@@ -8,6 +8,8 @@ const QuotesCards = ({quotes}) => {
         return <QuotesLoading />;
     }
 
+    console
+
     return (
         <div className="quotes-list">
             {quotes.map((quote) =>{
@@ -30,10 +32,10 @@ const QuotesCards = ({quotes}) => {
                         </Link>
                         <p>
                             <FaRegCopyright />
-                            <span>
+                            <Link to={`/quotes/author/${quote.author_slug}`} className="author-name">
                                 {quote.author_name}
-                            </span>
-                        </p>
+                            </Link>
+                        </p>    
                     </div>
                 </div>
             )})}

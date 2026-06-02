@@ -5,7 +5,7 @@ const Footer = () => {
     return (
         <footer>
             <p>© {year} Ilmalogiya. Barcha huquqlar himoyalangan.</p>
-            <span>Versiya: 1.1.0</span>
+            <span>Versiya: 1.1.1</span>
         </footer>
     );
 }

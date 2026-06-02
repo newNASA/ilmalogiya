@@ -11,7 +11,6 @@ const RightPosts = ({ randomPost, lastPost }) => {
   const cleanLastDesc = stripHTML(lastPost?.description || "");
   const url = import.meta.env.VITE_API_MEDIA_URL;
 
-
   return (
     <div className="rightposts">
       <div className="telegram shadow-elegant">
@@ -30,7 +29,7 @@ const RightPosts = ({ randomPost, lastPost }) => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <BsTelegram /> Kanalga qo‘shilish
+            <BsTelegram /> Telegram
           </a>
           <a
             href="https://www.instagram.com/ilmalogiya/"

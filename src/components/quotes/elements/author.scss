@@ -1,0 +1,387 @@
+.author-info {
+    width: 100%;
+    background-color: var(--white);
+    border-radius: 15px;
+    padding: 30px;
+
+    .infos {
+        display: flex;
+        gap: 30px;
+
+        .info-left {
+            img {
+                width: 150px;
+                height: 150px;
+                border-radius: 15px;
+                object-fit: cover;
+                object-position: center;
+            }
+        }
+
+        .info-right {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            gap: 15px;
+
+            h1 {
+                color: var(--accent);
+                font-size: 2rem;
+                font-weight: 700;
+            }
+
+            p {
+                color: var(--text);
+                font-size: 1rem;
+                line-height: 1.5;
+                color: var(--grey);
+
+
+                span {
+                    color: var(--accent);
+                    font-weight: 700;
+                    font-size: 18px;
+                }
+            }
+
+            .dates {
+                display: flex;
+                gap: 20px;
+
+                p {
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
+                    color: var(--grey);
+                    font-size: 14px;
+
+                    svg {
+                        color: var(--accent);
+                    }
+                }
+            }
+        }
+    }
+    .quotes{
+        margin-top: 30px;
+        h2 {
+            color: var(--accent);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        p {
+            color: var(--text);
+            font-size: 1rem;
+            line-height: 1.5;
+            color: var(--grey);
+        }
+
+        ul {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+
+            li {
+                background-color: var(--light);
+                padding: 20px;
+                border-radius: 10px;
+                border-left: 5px solid var(--accent);
+
+                blockquote {
+                    color: var(--grey);
+                    text-decoration: italic;
+                    font-size: 1rem;
+                    line-height: 1.5;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: flex-start;
+                    gap: 10px;
+
+
+                    .quote-icon {
+                        color: var(--accent);
+                        font-size: 1.2rem;
+                        flex-shrink: 0;
+                        margin-top: 2px;
+                        opacity: 0.5;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.author-loading {
+    width: 100%;
+    background-color: var(--white);
+    border-radius: 15px;
+    padding: 30px;
+
+    .infos-shimmer {
+        display: flex;
+        gap: 30px;
+
+        .avatar-shimmer {
+            width: 150px;
+            height: 150px;
+            border-radius: 15px;
+            background: var(--background);
+            position: relative;
+            overflow: hidden;
+
+            &::after {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: -50%;
+                width: 50%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+                animation: shimmer 1.5s infinite;
+            }
+        }
+
+        .details-shimmer {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            gap: 15px;
+            flex: 1;
+
+            .name-shimmer {
+                width: 60%;
+                height: 35px;
+                border-radius: 8px;
+                background: var(--background);
+                position: relative;
+                overflow: hidden;
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: -50%;
+                    width: 50%;
+                    height: 100%;
+                    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+                    animation: shimmer 1.5s infinite;
+                }
+            }
+
+            .count-shimmer {
+                width: 30%;
+                height: 20px;
+                border-radius: 6px;
+                background: var(--background);
+                position: relative;
+                overflow: hidden;
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: -50%;
+                    width: 50%;
+                    height: 100%;
+                    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+                    animation: shimmer 1.5s infinite;
+                }
+            }
+
+            .dates-shimmer {
+                display: flex;
+                gap: 20px;
+
+                .date-shimmer {
+                    width: 120px;
+                    height: 18px;
+                    border-radius: 6px;
+                    background: var(--background);
+                    position: relative;
+                    overflow: hidden;
+
+                    &::after {
+                        content: "";
+                        position: absolute;
+                        top: 0;
+                        left: -50%;
+                        width: 50%;
+                        height: 100%;
+                        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+                        animation: shimmer 1.5s infinite;
+                    }
+                }
+            }
+        }
+    }
+
+    .bio-shimmer {
+        margin-top: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        .line {
+            width: 100%;
+            height: 18px;
+            border-radius: 6px;
+            background: var(--background);
+            position: relative;
+            overflow: hidden;
+
+            &::after {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: -50%;
+                width: 50%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+                animation: shimmer 1.5s infinite;
+            }
+
+            &:nth-child(2) {
+                width: 90%;
+            }
+            &:nth-child(3) {
+                width: 75%;
+            }
+        }
+    }
+
+    .quotes-shimmer {
+        margin-top: 40px;
+
+        .title-shimmer {
+            width: 200px;
+            height: 25px;
+            border-radius: 8px;
+            background: var(--background);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 20px;
+
+            &::after {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: -50%;
+                width: 50%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+                animation: shimmer 1.5s infinite;
+            }
+        }
+
+        .quote-item-shimmer {
+            background-color: var(--light);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid var(--accent);
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+
+            .line {
+                width: 100%;
+                height: 16px;
+                border-radius: 4px;
+                background: var(--background);
+                position: relative;
+                overflow: hidden;
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: -50%;
+                    width: 50%;
+                    height: 100%;
+                    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+                    animation: shimmer 1.5s infinite;
+                }
+
+                &:nth-child(2) {
+                    width: 80%;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .author-info, .author-loading {
+        padding: 20px 15px;
+
+        .infos, .infos-shimmer {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 20px;
+
+            .info-right, .details-shimmer {
+                align-items: center;
+                text-align: center;
+                width: 100%;
+
+                h1 {
+                    font-size: 1.6rem;
+                }
+
+                .name-shimmer {
+                    width: 80%;
+                    margin: 0 auto;
+                }
+
+                .count-shimmer {
+                    width: 50%;
+                    margin: 0 auto;
+                }
+
+                .dates, .dates-shimmer {
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    gap: 8px 16px;
+                }
+            }
+        }
+
+        .bio, .bio-shimmer {
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        .quotes, .quotes-shimmer {
+            margin-top: 25px;
+
+            h2 {
+                font-size: 1.3rem;
+                text-align: center;
+            }
+
+            .title-shimmer {
+                margin: 0 auto 20px auto;
+            }
+
+            ul {
+                gap: 12px;
+
+                li, .quote-item-shimmer {
+                    padding: 15px;
+                    
+                    blockquote {
+                        font-size: 0.95rem;
+                        
+                        .quote-icon {
+                            font-size: 1rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+

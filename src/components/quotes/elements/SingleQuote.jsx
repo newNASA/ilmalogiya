@@ -11,6 +11,7 @@ function SingleQuote({ slug: propSlug, initialQuote }) {
     const { quote: fetchedQuote, loading, error } = useSingleQuoteQuery(initialQuote ? null : slug);
     const quote = initialQuote || fetchedQuote;
 
+    if (loading && !quote) return <SingleQuoteLoading />;
     if (error && !quote) return <div className="error">Xatolik: {error}</div>;
     if (!quote) return <div className="not-found">Quote topilmadi</div>;
 
@@ -50,7 +51,7 @@ function SingleQuote({ slug: propSlug, initialQuote }) {
 
                 {/* Author Info */}
                 <div className="author-details">
-                    <Link to={`/authors/${quote.author?.slug || quote.author_slug}`} className="author-name">
+                    <Link to={`/quotes/author/${quote.author?.slug || quote.author_slug}`} className="author-name">
                         <FaRegCopyright />
                         <span>{quote.author?.name || quote.author_name}</span>
                     </Link>

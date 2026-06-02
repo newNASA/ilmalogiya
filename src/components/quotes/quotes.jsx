@@ -12,7 +12,6 @@ import Pagination from "../pagination/pagination";
 import SingleQuoteLoading from "./elements/singlequoteloading";
 import SingleQuote from "./elements/SingleQuote";
 
-// OnLoad komponentini funksiya sifatida emas, komponent sifatida e'lon qilamiz
 const OnLoad = () => (
     <div className="onload rightposts">
         <div className="onload-telegram telegram">
