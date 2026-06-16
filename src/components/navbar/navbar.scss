@@ -5,12 +5,13 @@ nav {
   align-items: center;
   padding: 0 100px;
   background-color: var(--background);
-  
-  position: fixed; 
+
+  position: fixed;
   top: 0;
-  width: 100%;  
+  width: 100%;
   z-index: 100;
   max-width: 1920px;
+
   .logo {
     display: flex;
     align-items: center;
@@ -50,7 +51,7 @@ nav {
       display: flex;
       gap: 5px;
       align-items: center;
-      
+
       &:hover {
         border: 1px solid var(--accent);
         background-color: var(--accent);
@@ -70,21 +71,18 @@ nav {
   .login-btn {
     display: inline-flex;
     align-items: center;
-    gap: 7px;
-    padding: 8px 16px;
-    border-radius: 50px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 12px 15px;
     background-color: var(--accent);
+    border-radius: 15px;
     color: var(--white);
-    font-size: 15px;
-    font-weight: 500;
-    cursor: pointer;
-    border: none;
-    transition: opacity 0.2s;
+    transition: 0.3s;
 
-    &:hover { opacity: 0.85; }
-    &:disabled { opacity: 0.6; cursor: not-allowed; }
-
-    svg { font-size: 14px; }
+    svg {
+      font-size: 14px;
+    }
   }
 
   .user-menu-wrapper {
@@ -128,7 +126,7 @@ nav {
       width: 220px;
       background-color: var(--white);
       border-radius: 15px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
       overflow: hidden;
       z-index: 200;
       border: 1px solid var(--grey);
@@ -160,9 +158,15 @@ nav {
         transition: background 0.15s;
         cursor: pointer;
 
-        &:hover { background: var(--background); color: var(--accent); }
+        &:hover {
+          background: var(--background);
+          color: var(--accent);
+        }
 
-        svg { color: var(--accent); font-size: 15px; }
+        svg {
+          color: var(--accent);
+          font-size: 15px;
+        }
       }
 
       .user-dropdown-logout {
@@ -178,7 +182,9 @@ nav {
         cursor: pointer;
         transition: background 0.15s;
 
-        &:hover { background: rgba(192,57,43,0.07); }
+        &:hover {
+          background: rgba(192, 57, 43, 0.07);
+        }
       }
     }
   }
@@ -246,7 +252,7 @@ nav {
     gap: 16px;
     margin: 0;
 
-    li{
+    li {
       padding: 10px 16px;
       background-color: var(--white);
       border-radius: 15px;
@@ -341,8 +347,13 @@ nav {
     transition: opacity 0.2s;
     width: 100%;
 
-    &:hover { opacity: 0.85; }
-    &:disabled { opacity: 0.6; }
+    &:hover {
+      opacity: 0.85;
+    }
+
+    &:disabled {
+      opacity: 0.6;
+    }
   }
 
   .mobile-logout-btn {
@@ -350,7 +361,7 @@ nav {
     align-items: center;
     justify-content: center;
     padding: 10px;
-    background: rgba(192,57,43,0.08);
+    background: rgba(192, 57, 43, 0.08);
     color: #c0392b;
     border-radius: 15px;
     font-size: 14px;
@@ -359,7 +370,9 @@ nav {
     width: 100%;
     transition: background 0.2s;
 
-    &:hover { background: rgba(192,57,43,0.15); }
+    &:hover {
+      background: rgba(192, 57, 43, 0.15);
+    }
   }
 }
 
@@ -417,4 +430,3 @@ nav {
     }
   }
 }
-
