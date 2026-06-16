@@ -54,16 +54,49 @@
                         }
                     }
 
-                    p {
+                    .quotes-card-footer {
                         display: flex;
                         align-items: center;
-                        gap: 5px;
-                        font-family: var(--open-sans);
-                        font-weight: 600;
-                        color: rgb(120, 120, 120);
+                        justify-content: space-between;
 
-                        &:hover {
-                            text-decoration: underline;
+                        p {
+                            display: flex;
+                            align-items: center;
+                            gap: 5px;
+                            font-family: var(--open-sans);
+                            font-weight: 600;
+                            color: rgb(120, 120, 120);
+
+                            &:hover {
+                                text-decoration: underline;
+                            }
+                        }
+
+                        .quote-bookmark {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            width: 32px;
+                            height: 32px;
+                            border-radius: 50%;
+                            background: none;
+                            border: 1px solid var(--grey);
+                            color: var(--grey);
+                            cursor: pointer;
+                            transition: 0.2s;
+                            font-size: 14px;
+                            flex-shrink: 0;
+
+                            &:hover {
+                                border-color: var(--accent);
+                                color: var(--accent);
+                            }
+
+                            &.saved {
+                                background-color: var(--accent);
+                                border-color: var(--accent);
+                                color: var(--white);
+                            }
                         }
                     }
 
@@ -83,6 +116,40 @@
         background-color: var(--white);
         border-radius: 15px;
         padding: 30px;
+    }
+
+    .single-quote-tags-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+
+        .quote-bookmark {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: none;
+            border: 1px solid var(--grey);
+            color: var(--grey);
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 15px;
+            flex-shrink: 0;
+
+            &:hover {
+                border-color: var(--accent);
+                color: var(--accent);
+            }
+
+            &.saved {
+                background-color: var(--accent);
+                border-color: var(--accent);
+                color: var(--white);
+            }
+        }
     }
 
     .single-card{

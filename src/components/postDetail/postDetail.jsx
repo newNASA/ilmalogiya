@@ -1,14 +1,27 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { MdOutlineDateRange } from "react-icons/md";
-import { FaRegEdit, FaRegEye, FaTelegramPlane, FaFacebookF, FaShareAlt, FaCheck } from "react-icons/fa";
+import { FaRegEdit, FaRegEye, FaTelegramPlane, FaFacebookF, FaCheck, FaBookmark, FaRegBookmark } from "react-icons/fa";
 import { FaArrowLeftLong, FaXTwitter } from "react-icons/fa6";
 import { IoClose, IoLinkOutline } from "react-icons/io5";
+import { useAuth } from "../../context/AuthContext";
+import { savePost, unsavePost } from "../../api/authApi";
 import "./postDetail.scss";
 
 const PostDetail = ({ post }) => {
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [savePending, setSavePending] = useState(false);
+  const { user, savedPostIds, toggleSavedPost } = useAuth();
+  const isSaved = post && (savedPostIds.has(post.id) || post.is_saved === true);
+
+  async function handleBookmark() {
+    if (!user || savePending) return;
+    setSavePending(true);
+    const ok = isSaved ? await unsavePost(post.id) : await savePost(post.id);
+    if (ok) toggleSavedPost(post.id, !isSaved);
+    setSavePending(false);
+  }
 
   const pageUrl = window.location.href;
   const pageTitle = post?.title || "Ilmalogiya";
@@ -108,10 +121,22 @@ const PostDetail = ({ post }) => {
         )}
 
         {/* Taglar */}
-        <div className="post_tags">
-          {post.tags?.map((tag) => (
-            <button key={tag}>{tag}</button>
-          ))}
+        <div className="post_tags_row">
+          <div className="post_tags">
+            {post.tags?.map((tag) => (
+              <button key={tag}>{tag}</button>
+            ))}
+          </div>
+          {user && (
+            <button
+              className={`post_bookmark ${isSaved ? "saved" : ""}`}
+              onClick={handleBookmark}
+              disabled={savePending}
+              title={isSaved ? "Saqlanganlardan o'chirish" : "Saqlash"}
+            >
+              {isSaved ? <FaBookmark /> : <FaRegBookmark />}
+            </button>
+          )}
         </div>
 
         {/* Sarlavha */}

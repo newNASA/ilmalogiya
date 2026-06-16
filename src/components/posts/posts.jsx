@@ -1,15 +1,19 @@
 import { Link } from "react-router-dom";
 import { FaArrowRightLong } from "react-icons/fa6";
+import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import "./posts.scss";
 import { stripHTML } from "../../utils/stripHTML.jsx";
-import { useMemo } from "react";
+import { useState } from "react";
+import { useAuth } from "../../context/AuthContext";
+import { savePost, unsavePost } from "../../api/authApi";
 
 const Posts = ({
   allPosts = [],
   handleTagClick,
-  loading = false,
 }) => {
   const filteredPosts = allPosts;
+  const { user, savedPostIds, toggleSavedPost } = useAuth();
+  const [pendingIds, setPendingIds] = useState(new Set());
 
   if (!Array.isArray(filteredPosts) || filteredPosts.length === 0) {
     return <h1 className="postloading-message">Hech qanday post topilmadi</h1>;
@@ -17,14 +21,26 @@ const Posts = ({
 
   const url = import.meta.env.VITE_API_MEDIA_URL;
 
+  async function handleBookmark(e, postId, isSaved) {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!user) return;
+    if (pendingIds.has(postId)) return;
+
+    setPendingIds((p) => new Set(p).add(postId));
+    const ok = isSaved ? await unsavePost(postId) : await savePost(postId);
+    if (ok) toggleSavedPost(postId, !isSaved);
+    setPendingIds((p) => { const n = new Set(p); n.delete(postId); return n; });
+  }
+
   return (
     <div className="posts">
       {filteredPosts.map((post) => {
         const hasFile = !!post.file;
         const isVideo = hasFile && /\.(mp4|webm|ogg)$/i.test(post.file);
         const cleanDescription = stripHTML(post.description || "");
-
         const postLink = post.slug ? `/posts/${post.slug}` : `/posts/${post.id}`;
+        const isSaved = savedPostIds.has(post.id) || post.is_saved === true;
 
         return (
           <div
@@ -50,18 +66,31 @@ const Posts = ({
             )}
 
             <div className="post_right">
-              <div className="post_tags">
-                {post.tags?.map((tag) => (
+              <div className="post_tags_row">
+                <div className="post_tags">
+                  {post.tags?.map((tag) => (
+                    <button
+                      key={tag}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleTagClick?.(tag);
+                      }}
+                    >
+                      {tag}
+                    </button>
+                  ))}
+                </div>
+
+                {user && (
                   <button
-                    key={tag}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleTagClick?.(tag);
-                    }}
+                    className={`post_bookmark ${isSaved ? "saved" : ""}`}
+                    onClick={(e) => handleBookmark(e, post.id, isSaved)}
+                    disabled={pendingIds.has(post.id)}
+                    title={isSaved ? "Saqlanganlardan o'chirish" : "Saqlash"}
                   >
-                    {tag}
+                    {isSaved ? <FaBookmark /> : <FaRegBookmark />}
                   </button>
-                ))}
+                )}
               </div>
 
               <div className="post_text">

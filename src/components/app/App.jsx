@@ -7,6 +7,7 @@ import Footer from "../footer/footer";
 import Quotes from "../quotes/quotes";
 import Author from "../quotes/elements/author";
 import SingleQuote from "../quotes/elements/SingleQuote";
+import SavedPage from "../saved/SavedPage";
 
 function App() {
   const location = useLocation();
@@ -27,6 +28,7 @@ function App() {
         <Route path="/quotes" element={<Quotes />} />
         <Route path="/quotes/author/:slug" element={<Author />} />
         <Route path="/quotes/:slug" element={<Quotes />} />
+        <Route path="/saved" element={<SavedPage />} />
       </Routes>
       <Footer />
     </div>

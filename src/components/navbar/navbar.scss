@@ -66,6 +66,122 @@ nav {
     font-size: 26px;
     cursor: pointer;
   }
+
+  .login-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 16px;
+    border-radius: 50px;
+    background-color: var(--accent);
+    color: var(--white);
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: opacity 0.2s;
+
+    &:hover { opacity: 0.85; }
+    &:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    svg { font-size: 14px; }
+  }
+
+  .user-menu-wrapper {
+    position: relative;
+
+    .user-avatar-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      display: flex;
+      align-items: center;
+
+      .user-avatar {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid var(--accent);
+      }
+
+      .user-avatar-placeholder {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background-color: var(--accent);
+        color: var(--white);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        font-weight: 600;
+        border: 2px solid var(--accent);
+      }
+    }
+
+    .user-dropdown {
+      position: absolute;
+      top: calc(100% + 12px);
+      right: 0;
+      width: 220px;
+      background-color: var(--white);
+      border-radius: 15px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      overflow: hidden;
+      z-index: 200;
+      border: 1px solid var(--grey);
+
+      .user-dropdown-info {
+        padding: 14px 16px;
+        border-bottom: 1px solid var(--grey);
+
+        .user-dropdown-name {
+          font-weight: 600;
+          font-size: 15px;
+          color: var(--text);
+          margin-bottom: 2px;
+        }
+
+        .user-dropdown-email {
+          font-size: 12px;
+          color: var(--grey);
+        }
+      }
+
+      .user-dropdown-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 16px;
+        font-size: 14px;
+        color: var(--text);
+        transition: background 0.15s;
+        cursor: pointer;
+
+        &:hover { background: var(--background); color: var(--accent); }
+
+        svg { color: var(--accent); font-size: 15px; }
+      }
+
+      .user-dropdown-logout {
+        display: block;
+        width: 100%;
+        text-align: left;
+        padding: 12px 16px;
+        font-size: 14px;
+        color: #c0392b;
+        background: none;
+        border: none;
+        border-top: 1px solid var(--grey);
+        cursor: pointer;
+        transition: background 0.15s;
+
+        &:hover { background: rgba(192,57,43,0.07); }
+      }
+    }
+  }
 }
 
 .mobile-menu {
@@ -158,10 +274,92 @@ nav {
     }
   }
 
+  .mobile-user-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--grey);
+
+    .mobile-user-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--accent);
+      flex-shrink: 0;
+    }
+
+    .mobile-user-placeholder {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background-color: var(--accent);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    .mobile-user-name {
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--text);
+    }
+
+    .mobile-user-email {
+      font-size: 12px;
+      color: var(--grey);
+      margin-top: 2px;
+    }
+  }
+
   .menu-footer {
     margin-top: auto;
-    padding-top: 30px;
-    padding: 20px 20px 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .mobile-login-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px;
+    background-color: var(--accent);
+    color: var(--white);
+    border-radius: 15px;
+    font-size: 15px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    width: 100%;
+
+    &:hover { opacity: 0.85; }
+    &:disabled { opacity: 0.6; }
+  }
+
+  .mobile-logout-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    background: rgba(192,57,43,0.08);
+    color: #c0392b;
+    border-radius: 15px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.2s;
+
+    &:hover { background: rgba(192,57,43,0.15); }
   }
 }
 

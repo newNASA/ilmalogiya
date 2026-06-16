@@ -5,11 +5,17 @@ import { PiMoneyDuotone } from "react-icons/pi";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoClose } from "react-icons/io5";
 import { MdOutlineArticle } from "react-icons/md";
-import { FaQuoteRight } from "react-icons/fa";
-import { useState, useEffect } from "react";
+import { FaQuoteRight, FaBookmark } from "react-icons/fa";
+import { FaGoogle } from "react-icons/fa";
+import { useState, useEffect, useRef } from "react";
+import { useAuth } from "../../context/AuthContext";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const [loginLoading, setLoginLoading] = useState(false);
+  const { user, loginGoogle, logout } = useAuth();
+  const userMenuRef = useRef(null);
 
   useEffect(() => {
     if (menuOpen) {
@@ -27,6 +33,27 @@ function Navbar() {
       document.body.style.width = "";
     };
   }, [menuOpen]);
+
+  useEffect(() => {
+    function handleClickOutside(e) {
+      if (userMenuRef.current && !userMenuRef.current.contains(e.target)) {
+        setUserMenuOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  async function handleLogin() {
+    setLoginLoading(true);
+    try {
+      await loginGoogle();
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setLoginLoading(false);
+    }
+  }
 
   return (
     <>
@@ -58,6 +85,53 @@ function Navbar() {
               <PiMoneyDuotone /> Donat qilish
             </Link>
           </li>
+
+          {user ? (
+            <li className="user-menu-wrapper" ref={userMenuRef}>
+              <button
+                className="user-avatar-btn"
+                onClick={() => setUserMenuOpen((v) => !v)}
+              >
+                {user.avatar ? (
+                  <img src={user.avatar} alt={user.full_name} className="user-avatar" />
+                ) : (
+                  <span className="user-avatar-placeholder">
+                    {(user.full_name || user.email || "U")[0].toUpperCase()}
+                  </span>
+                )}
+              </button>
+
+              {userMenuOpen && (
+                <div className="user-dropdown">
+                  <div className="user-dropdown-info">
+                    <p className="user-dropdown-name">{user.full_name || "Foydalanuvchi"}</p>
+                    <p className="user-dropdown-email">{user.email}</p>
+                  </div>
+                  <Link
+                    to="/saved"
+                    className="user-dropdown-item"
+                    onClick={() => setUserMenuOpen(false)}
+                  >
+                    <FaBookmark /> Saqlangan
+                  </Link>
+                  <button className="user-dropdown-logout" onClick={logout}>
+                    Chiqish
+                  </button>
+                </div>
+              )}
+            </li>
+          ) : (
+            <li>
+              <button
+                className="login-btn"
+                onClick={handleLogin}
+                disabled={loginLoading}
+              >
+                <FaGoogle />
+                {loginLoading ? "Kirilmoqda..." : "Kirish"}
+              </button>
+            </li>
+          )}
         </ul>
 
         <div className="burger-menu" onClick={() => setMenuOpen(true)}>
@@ -74,6 +148,22 @@ function Navbar() {
           </button>
         </div>
 
+        {user && (
+          <div className="mobile-user-info">
+            {user.avatar ? (
+              <img src={user.avatar} alt={user.full_name} className="mobile-user-avatar" />
+            ) : (
+              <span className="mobile-user-placeholder">
+                {(user.full_name || user.email || "U")[0].toUpperCase()}
+              </span>
+            )}
+            <div>
+              <p className="mobile-user-name">{user.full_name || "Foydalanuvchi"}</p>
+              <p className="mobile-user-email">{user.email}</p>
+            </div>
+          </div>
+        )}
+
         <ul className="mobile-links">
           <li>
             <Link to="/" onClick={() => setMenuOpen(false)}>
@@ -85,6 +175,13 @@ function Navbar() {
               <FaQuoteRight /> Iqtiboslar
             </Link>
           </li>
+          {user && (
+            <li>
+              <Link to="/saved" onClick={() => setMenuOpen(false)}>
+                <FaBookmark /> Saqlangan
+              </Link>
+            </li>
+          )}
         </ul>
 
         <div className="menu-footer">
@@ -96,10 +193,26 @@ function Navbar() {
           >
             <PiMoneyDuotone /> Donat qilish
           </Link>
+
+          {user ? (
+            <button
+              className="mobile-logout-btn"
+              onClick={() => { logout(); setMenuOpen(false); }}
+            >
+              Chiqish
+            </button>
+          ) : (
+            <button
+              className="mobile-login-btn"
+              onClick={() => { handleLogin(); setMenuOpen(false); }}
+              disabled={loginLoading}
+            >
+              <FaGoogle /> {loginLoading ? "Kirilmoqda..." : "Google orqali kirish"}
+            </button>
+          )}
         </div>
       </div>
 
-      {/* Qoraygan fon */}
       {menuOpen && (
         <div className="menu-overlay" onClick={() => setMenuOpen(false)}></div>
       )}
