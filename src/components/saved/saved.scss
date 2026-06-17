@@ -1,7 +1,7 @@
 .saved-page {
-  max-width: 900px;
+  max-width: 1200px;
   margin: 100px auto 60px;
-  padding: 0 20px;
+  padding: 0 100px;
 
   .saved-header {
     margin-bottom: 30px;
@@ -37,10 +37,7 @@
       cursor: pointer;
       transition: 0.2s;
 
-      svg {
-        font-size: 16px;
-        color: var(--accent);
-      }
+      svg { font-size: 16px; color: var(--accent); }
 
       .saved-tab-count {
         background-color: var(--background);
@@ -55,9 +52,7 @@
         background-color: var(--accent);
         color: var(--white);
         border-color: var(--accent);
-
         svg { color: var(--white); }
-
         .saved-tab-count {
           background-color: rgba(255,255,255,0.2);
           color: var(--white);
@@ -67,13 +62,263 @@
     }
   }
 
-  .saved-loading {
+  // ── Empty ──
+  .saved-empty {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 20px;
+    text-align: center;
+    gap: 12px;
+
+    .saved-empty-icon { font-size: 48px; color: var(--grey); }
+
+    h2 { font-size: 1.4rem; color: var(--text); }
+
+    p { color: var(--grey); max-width: 360px; line-height: 1.6; }
+
+    .saved-go-btn {
+      margin-top: 8px;
+      padding: 10px 24px;
+      background-color: var(--accent);
+      color: var(--white);
+      border-radius: 50px;
+      font-size: 15px;
+      transition: 0.2s;
+      &:hover { opacity: 0.85; }
+    }
+  }
+
+  // ── Posts grid (vertical cards) ──
+  .saved-posts-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+
+    .saved-post-card {
+      background-color: var(--white);
+      border-radius: 15px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+
+      // Rasm — YUQORIDA
+      .saved-post-media {
+        width: 100%;
+        height: 220px;
+        overflow: hidden;
+        border-radius: 15px;
+        display: block;
+        flex-shrink: 0;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+          display: block;
+          transition: transform 0.3s;
+        }
+
+        &:hover img { transform: scale(1.04); }
+
+        .saved-video-thumb {
+          width: 100%;
+          height: 100%;
+          background: #1a1a1a;
+          position: relative;
+
+          video {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+
+          .saved-play-icon {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.3);
+
+            svg {
+              font-size: 2rem;
+              color: var(--white);
+              filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));
+            }
+          }
+        }
+      }
+
+      // Kontent — PASTDA
+      .saved-post-body {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        padding: 1.2rem;
+
+        .saved-post-tags-row {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 8px;
+
+          .saved-bookmark-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 1px solid var(--accent);
+            background-color: var(--accent);
+            color: var(--white);
+            cursor: pointer;
+            font-size: 13px;
+            flex-shrink: 0;
+            transition: 0.2s;
+            &:hover { opacity: 0.75; }
+          }
+        }
+
+        .saved-post-text {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+
+          h2 {
+            color: var(--accent);
+            font-size: 1.1rem;
+            line-height: 1.35;
+            font-family: var(--lora);
+            &:hover { text-decoration: underline; }
+          }
+
+          p {
+            color: var(--text);
+            font-size: 0.9rem;
+            line-height: 1.5;
+          }
+        }
+
+        .saved-post-footer {
+          margin-top: auto;
+
+          .saved-read-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 14px;
+            transition: gap 0.2s;
+            &:hover { gap: 10px; }
+          }
+        }
+      }
+
+      // Rasm yo'q bo'lsa
+      &.no-media .saved-post-body {
+        padding: 1.5rem;
+      }
+    }
+  }
+
+  // ── Quotes list ──
+  .saved-quotes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    .saved-quote-card {
+      display: flex;
+      gap: 1.5rem;
+      background-color: var(--white);
+      border-radius: 15px;
+      padding: 2rem;
+
+      .saved-quote-left {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+
+        img {
+          width: 100px;
+          height: 100px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+      }
+
+      .saved-quote-right {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 12px;
+
+        q {
+          font-size: 1.1rem;
+          font-weight: 600;
+          color: var(--accent);
+          line-height: 1.5;
+          font-style: italic;
+          font-family: "PT Serif", serif;
+          cursor: pointer;
+          &:hover { text-decoration: underline; }
+        }
+
+        .saved-quote-footer {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          gap: 8px;
+
+          .author-name {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: var(--open-sans);
+            font-weight: 600;
+            color: rgb(120, 120, 120);
+            &:hover { text-decoration: underline; }
+          }
+
+          .saved-bookmark-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 1px solid var(--accent);
+            background-color: var(--accent);
+            color: var(--white);
+            cursor: pointer;
+            font-size: 13px;
+            transition: 0.2s;
+            &:hover { opacity: 0.75; }
+          }
+        }
+      }
+    }
+  }
+
+  // Skeleton
+  .saved-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
 
     .saved-skeleton {
-      height: 130px;
+      height: 320px;
       border-radius: 15px;
       background: var(--white);
       position: relative;
@@ -89,222 +334,43 @@
       }
     }
   }
+}
 
-  .saved-empty {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 80px 20px;
-    text-align: center;
-    gap: 12px;
+// ── Responsive ──
+@media screen and (max-width: 1441px) {
+  .saved-page { padding: 100px 50px 60px; }
+}
 
-    .saved-empty-icon {
-      font-size: 48px;
-      color: var(--grey);
+@media screen and (max-width: 1025px) {
+  .saved-page {
+    .saved-posts-list {
+      grid-template-columns: repeat(2, 1fr);
     }
-
-    h2 {
-      font-size: 1.4rem;
-      color: var(--text);
-    }
-
-    p {
-      color: var(--grey);
-      max-width: 360px;
-      line-height: 1.6;
-    }
-
-    .saved-go-btn {
-      margin-top: 8px;
-      padding: 10px 24px;
-      background-color: var(--accent);
-      color: var(--white);
-      border-radius: 50px;
-      font-size: 15px;
-      transition: 0.2s;
-
-      &:hover { opacity: 0.85; }
-    }
-  }
-
-  .saved-list {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-
-    .saved-item {
-      display: flex;
-      gap: 16px;
-      background-color: var(--white);
-      border-radius: 15px;
-      overflow: hidden;
-      padding: 16px;
-
-      .saved-item-img {
-        flex-shrink: 0;
-        width: 140px;
-        height: 110px;
-        border-radius: 10px;
-        overflow: hidden;
-
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-      }
-
-      .saved-item-body {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-
-        h3 {
-          font-size: 1rem;
-          color: var(--text);
-          line-height: 1.4;
-          transition: color 0.2s;
-
-          &:hover { color: var(--accent); }
-        }
-
-        p {
-          font-size: 14px;
-          color: var(--grey);
-          line-height: 1.5;
-        }
-
-        .saved-item-actions {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          margin-top: auto;
-
-          .saved-read-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 14px;
-            color: var(--accent);
-            font-weight: 500;
-            transition: gap 0.2s;
-
-            &:hover { gap: 10px; }
-          }
-
-          .saved-remove-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 13px;
-            color: var(--grey);
-            cursor: pointer;
-            transition: color 0.2s;
-            background: none;
-            border: none;
-            padding: 4px 8px;
-            border-radius: 8px;
-
-            &:hover {
-              color: #c0392b;
-              background: rgba(192,57,43,0.08);
-            }
-          }
-        }
-      }
-    }
-  }
-
-  .saved-quotes-list {
-    .saved-quote-item {
-      display: flex;
-      gap: 16px;
-      background-color: var(--white);
-      border-radius: 15px;
-      padding: 20px;
-
-      .saved-quote-left {
-        flex-shrink: 0;
-
-        img {
-          width: 55px;
-          height: 55px;
-          border-radius: 50%;
-          object-fit: cover;
-          border: 2px solid var(--grey);
-        }
-      }
-
-      .saved-quote-right {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-
-        q {
-          font-family: var(--lora);
-          font-size: 1rem;
-          line-height: 1.6;
-          color: var(--text);
-          font-style: italic;
-        }
-
-        .saved-quote-footer {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          flex-wrap: wrap;
-          gap: 8px;
-
-          .author-name {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 14px;
-            color: var(--accent);
-          }
-
-          .saved-remove-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 13px;
-            color: var(--grey);
-            cursor: pointer;
-            background: none;
-            border: none;
-            padding: 4px 8px;
-            border-radius: 8px;
-            transition: color 0.2s;
-
-            &:hover {
-              color: #c0392b;
-              background: rgba(192,57,43,0.08);
-            }
-          }
-        }
-      }
+    .saved-grid {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 }
 
-@media (max-width: 600px) {
+@media screen and (max-width: 769px) {
   .saved-page {
-    .saved-item {
-      flex-direction: column !important;
+    padding: 90px 20px 60px;
 
-      .saved-item-img {
-        width: 100% !important;
-        height: 180px !important;
-      }
+    .saved-posts-list {
+      grid-template-columns: 1fr;
     }
 
-    .saved-tabs {
-      .saved-tab {
-        padding: 8px 14px;
-        font-size: 14px;
+    .saved-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .saved-quotes-list .saved-quote-card {
+      padding: 1.2rem;
+      gap: 1rem;
+
+      .saved-quote-left img {
+        width: 70px;
+        height: 70px;
       }
     }
   }

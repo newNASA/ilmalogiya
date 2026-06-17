@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { FaArrowRightLong, FaRegCopyright, FaBookmark } from "react-icons/fa6";
+import { FaArrowRightLong, FaRegCopyright, FaBookmark, FaPlay } from "react-icons/fa6";
 import { MdOutlineArticle } from "react-icons/md";
 import { FaQuoteRight } from "react-icons/fa";
 import { getSavedItems, unsavePost, unsaveQuote } from "../../api/authApi";
@@ -19,8 +19,6 @@ function SavedPage() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const url = import.meta.env.VITE_API_MEDIA_URL;
-
   useEffect(() => {
     if (!user) { setLoading(false); return; }
     setLoading(true);
@@ -30,7 +28,9 @@ function SavedPage() {
     });
   }, [user]);
 
-  async function handleUnsavePost(postId) {
+  async function handleUnsavePost(e, postId) {
+    e.preventDefault();
+    e.stopPropagation();
     const ok = await unsavePost(postId);
     if (ok) {
       toggleSavedPost(postId, false);
@@ -45,7 +45,9 @@ function SavedPage() {
     }
   }
 
-  async function handleUnsaveQuote(quoteId) {
+  async function handleUnsaveQuote(e, quoteId) {
+    e.preventDefault();
+    e.stopPropagation();
     const ok = await unsaveQuote(quoteId);
     if (ok) {
       toggleSavedQuote(quoteId, false);
@@ -99,8 +101,8 @@ function SavedPage() {
       </div>
 
       {loading ? (
-        <div className="saved-loading">
-          {[1, 2, 3].map((i) => <div key={i} className="saved-skeleton" />)}
+        <div className="saved-grid">
+          {[1, 2, 3, 4].map((i) => <div key={i} className="saved-skeleton" />)}
         </div>
       ) : tab === "posts" ? (
         posts.length === 0 ? (
@@ -111,36 +113,55 @@ function SavedPage() {
             <Link to="/" className="saved-go-btn">Maqolalarga o'tish</Link>
           </div>
         ) : (
-          <div className="saved-list">
+          <div className="saved-posts-list">
             {posts.map((post) => {
+              const isVideo = post.file && /\.(mp4|webm|ogg)$/i.test(post.file);
               const cleanDesc = stripHTML(post.description || "");
               const postLink = post.slug ? `/posts/${post.slug}` : `/posts/${post.id}`;
               return (
-                <div key={post.id} className="saved-item shadow-elegant">
+                <div key={post.id} className={`saved-post-card shadow-elegant${post.file ? "" : " no-media"}`}>
                   {post.file && (
-                    <div className="saved-item-img">
-                      <Link to={postLink}>
-                        <img src={url + post.file} alt={post.title} loading="lazy" />
-                      </Link>
-                    </div>
+                    <Link to={postLink} className="saved-post-media">
+                      {isVideo ? (
+                        <div className="saved-video-thumb">
+                          <video muted preload="auto" playsInline>
+                            <source src={post.file} type="video/mp4" />
+                          </video>
+                          <span className="saved-play-icon"><FaPlay /></span>
+                        </div>
+                      ) : (
+                        <img src={post.file} alt={post.title} loading="lazy" />
+                      )}
+                    </Link>
                   )}
-                  <div className="saved-item-body">
-                    <div className="post_tags">
-                      {post.tags?.map((tag) => <button key={tag}>{tag}</button>)}
-                    </div>
-                    <Link to={postLink}><h3>{post.title}</h3></Link>
-                    <p>{cleanDesc.length > 200 ? cleanDesc.slice(0, 200) + "..." : cleanDesc}</p>
-                    <div className="saved-item-actions">
-                      <Link to={postLink} className="saved-read-btn">
-                        O'qish <FaArrowRightLong />
-                      </Link>
+
+                  <div className="saved-post-body">
+                    <div className="saved-post-tags-row">
+                      <div className="post_tags">
+                        {post.tags?.map((tag) => <button key={tag}>{tag}</button>)}
+                      </div>
                       <button
-                        className="saved-remove-btn"
-                        onClick={() => handleUnsavePost(post.id)}
+                        className="saved-bookmark-btn saved"
+                        onClick={(e) => handleUnsavePost(e, post.id)}
                         title="Saqlanganlardan o'chirish"
                       >
-                        <FaBookmark /> O'chirish
+                        <FaBookmark />
                       </button>
+                    </div>
+
+                    <div className="saved-post-text">
+                      <Link to={postLink}>
+                        <h2>{post.title}</h2>
+                      </Link>
+                      <p>
+                        {cleanDesc.length > 160 ? cleanDesc.slice(0, 160) + "..." : cleanDesc}
+                      </p>
+                    </div>
+
+                    <div className="saved-post-footer">
+                      <Link to={postLink} className="saved-read-link">
+                        To'liq o'qish <FaArrowRightLong />
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -157,9 +178,9 @@ function SavedPage() {
             <Link to="/quotes" className="saved-go-btn">Iqtiboslarga o'tish</Link>
           </div>
         ) : (
-          <div className="saved-list saved-quotes-list">
+          <div className="saved-quotes-list">
             {quotes.map((quote) => (
-              <div key={quote.id} className="saved-quote-item shadow-elegant">
+              <div key={quote.id} className="saved-quote-card shadow-elegant">
                 <div className="saved-quote-left">
                   {(quote.author?.photo || quote.author_photo) && (
                     <img
@@ -169,6 +190,11 @@ function SavedPage() {
                   )}
                 </div>
                 <div className="saved-quote-right">
+                  <div className="post_tags">
+                    {quote.tags?.map((tag, i) => (
+                      <button key={tag.id || tag || i}>{tag.name || tag}</button>
+                    ))}
+                  </div>
                   <Link to={`/quotes/${quote.slug}`}>
                     <q>{quote.text}</q>
                   </Link>
@@ -178,11 +204,11 @@ function SavedPage() {
                       {quote.author?.name || quote.author_name}
                     </Link>
                     <button
-                      className="saved-remove-btn"
-                      onClick={() => handleUnsaveQuote(quote.id)}
+                      className="saved-bookmark-btn saved"
+                      onClick={(e) => handleUnsaveQuote(e, quote.id)}
                       title="Saqlanganlardan o'chirish"
                     >
-                      <FaBookmark /> O'chirish
+                      <FaBookmark />
                     </button>
                   </div>
                 </div>

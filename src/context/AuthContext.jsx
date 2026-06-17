@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect, useCallback } from "react";
 import { signInWithGoogle, firebaseSignOut } from "../firebase";
-import { loginWithGoogle, logout as apiLogout, getProfile, hasToken } from "../api/authApi";
+import { loginWithGoogle, logout as apiLogout, getProfile, getSavedItems, hasToken } from "../api/authApi";
 
 const AuthContext = createContext(null);
 
@@ -10,11 +10,22 @@ export function AuthProvider({ children }) {
   const [savedPostIds, setSavedPostIds] = useState(new Set());
   const [savedQuoteIds, setSavedQuoteIds] = useState(new Set());
 
+  async function loadSavedIds() {
+    const data = await getSavedItems();
+    if (!data) return;
+    setSavedPostIds(new Set(data.saved_posts.results.map((p) => p.id)));
+    setSavedQuoteIds(new Set(data.saved_quotes.results.map((q) => q.id)));
+  }
+
   const fetchProfile = useCallback(async () => {
     if (!hasToken()) { setLoading(false); return; }
     const profile = await getProfile();
-    if (profile) setUser(profile);
-    else { apiLogout(); }
+    if (profile) {
+      setUser(profile);
+      await loadSavedIds();
+    } else {
+      apiLogout();
+    }
     setLoading(false);
   }, []);
 
@@ -24,6 +35,7 @@ export function AuthProvider({ children }) {
     const idToken = await signInWithGoogle();
     const profile = await loginWithGoogle(idToken);
     setUser(profile);
+    await loadSavedIds();
     return profile;
   }
 

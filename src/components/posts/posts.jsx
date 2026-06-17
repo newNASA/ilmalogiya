@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { FaArrowRightLong } from "react-icons/fa6";
-import { FaBookmark, FaRegBookmark } from "react-icons/fa";
+import { FaBookmark, FaRegBookmark, FaPlay } from "react-icons/fa";
 import "./posts.scss";
 import { stripHTML } from "../../utils/stripHTML.jsx";
 import { useState } from "react";
@@ -51,9 +51,12 @@ const Posts = ({
               <div className="post_left">
                 <Link to={postLink}>
                   {isVideo ? (
-                    <video muted preload="metadata" playsInline>
-                      <source src={url + post.file} type="video/mp4" />
-                    </video>
+                    <div className="video-thumb">
+                      <video muted preload="auto" playsInline>
+                        <source src={url + post.file} type="video/mp4" />
+                      </video>
+                      <span className="video-play-icon"><FaPlay /></span>
+                    </div>
                   ) : (
                     <img
                       src={url + post.file}
