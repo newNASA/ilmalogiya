@@ -101,9 +101,48 @@ function SavedPage() {
       </div>
 
       {loading ? (
-        <div className="saved-grid">
-          {[1, 2, 3, 4].map((i) => <div key={i} className="saved-skeleton" />)}
-        </div>
+        tab === "posts" ? (
+          <div className="saved-posts-list">
+            {[...Array(6)].map((_, i) => (
+              <div key={i} className="saved-post-card saved-skeleton-card">
+                <div className="sk sk-media" />
+                <div className="saved-post-body">
+                  <div className="saved-post-tags-row">
+                    <div className="sk sk-tag" />
+                    <div className="sk sk-tag" />
+                  </div>
+                  <div className="saved-post-text">
+                    <div className="sk sk-title" />
+                    <div className="sk sk-line" />
+                    <div className="sk sk-line" />
+                    <div className="sk sk-line short" />
+                  </div>
+                  <div className="sk sk-link" />
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="saved-quotes-list">
+            {[...Array(5)].map((_, i) => (
+              <div key={i} className="saved-quote-card saved-skeleton-card">
+                <div className="saved-quote-left">
+                  <div className="sk sk-avatar" />
+                </div>
+                <div className="saved-quote-right">
+                  <div className="sk sk-tag" />
+                  <div className="sk sk-line" />
+                  <div className="sk sk-line" />
+                  <div className="sk sk-line short" />
+                  <div className="saved-quote-footer">
+                    <div className="sk sk-author" />
+                    <div className="sk sk-tag" />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )
       ) : tab === "posts" ? (
         posts.length === 0 ? (
           <div className="saved-empty">
