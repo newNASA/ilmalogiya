@@ -1,9 +1,10 @@
 import "./quotes.scss";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { LuSlidersHorizontal } from "react-icons/lu";
 import { IoClose } from "react-icons/io5";
-import { memo, useState } from "react";
+import { memo, useState, useEffect } from "react";
 import { useQuotesPageData } from "../../hooks/useQuotesPageData";
+import { useQuotesQuery } from "../../hooks/useQuotesQuery";
 
 import QuotesCards from "./elements/quotes_cards";
 import QuotesLoading from "./elements/quotesLoading";
@@ -35,7 +36,19 @@ const Quotes = () => {
     const [selectedTags, setSelectedTags] = useState([]);
 
     const [inputValue, setInputValue] = useState("");
+    const [debouncedSearch, setDebouncedSearch] = useState("");
     const [drawerOpen, setDrawerOpen] = useState(false);
+
+    // Debounce
+    useEffect(() => {
+        const handler = setTimeout(() => {
+            setDebouncedSearch(inputValue);
+        }, 500);
+        return () => clearTimeout(handler);
+    }, [inputValue]);
+
+    // Dropdown uchun real-time qidiruv
+    const { quotes: searchResults } = useQuotesQuery(1, debouncedSearch);
 
     const handleSearchSubmit = (e) => {
         e.preventDefault();
@@ -86,10 +99,30 @@ const Quotes = () => {
                                 <form className="search-form" onSubmit={handleSearchSubmit}>
                                     <input
                                         type="search"
-                                        placeholder="Qidirish..."
+                                        placeholder="Iqtibos yoki muallif..."
                                         value={inputValue}
                                         onChange={(e) => setInputValue(e.target.value)}
                                     />
+                                    {inputValue.trim() !== "" && searchResults.length > 0 && (
+                                        <ul className="search-dropdown">
+                                            {searchResults.map((quote, idx) => (
+                                                <li key={quote.id}>
+                                                    <Link
+                                                        to={`/quotes/${quote.slug}`}
+                                                        onClick={() => setInputValue("")}
+                                                    >
+                                                        <span className="idx">{idx + 1}.</span>
+                                                        {quote.author_name && (
+                                                            <span className="author-hint">{quote.author_name} — </span>
+                                                        )}
+                                                        {quote.text?.length > 60
+                                                            ? quote.text.slice(0, 60) + "..."
+                                                            : quote.text}
+                                                    </Link>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    )}
                                 </form>
 
                                 <button
