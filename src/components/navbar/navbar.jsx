@@ -4,8 +4,9 @@ import logo from "../../assets/logo.webp";
 import { PiMoneyDuotone } from "react-icons/pi";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoClose } from "react-icons/io5";
-import { MdOutlineArticle } from "react-icons/md";
-import { FaQuoteRight, FaBookmark } from "react-icons/fa";
+import { MdOutlineArticle, MdOutlineEdit } from "react-icons/md";
+import { FaRegFileLines } from "react-icons/fa6";
+import { FaQuoteRight, FaBookmark, FaUserCircle } from "react-icons/fa";
 import { FaGoogle } from "react-icons/fa";
 import { useState, useEffect, useRef } from "react";
 import { useAuth } from "../../context/AuthContext";
@@ -108,11 +109,32 @@ function Navbar() {
                     <p className="user-dropdown-email">{user.email}</p>
                   </div>
                   <Link
+                    to="/profile"
+                    className="user-dropdown-item"
+                    onClick={() => setUserMenuOpen(false)}
+                  >
+                    <FaUserCircle /> Profil
+                  </Link>
+                  <Link
                     to="/saved"
                     className="user-dropdown-item"
                     onClick={() => setUserMenuOpen(false)}
                   >
                     <FaBookmark /> Saqlangan
+                  </Link>
+                  <Link
+                    to="/submit"
+                    className="user-dropdown-item"
+                    onClick={() => setUserMenuOpen(false)}
+                  >
+                    <MdOutlineEdit /> Maqola yuborish
+                  </Link>
+                  <Link
+                    to="/my-posts"
+                    className="user-dropdown-item"
+                    onClick={() => setUserMenuOpen(false)}
+                  >
+                    <FaRegFileLines /> Mening maqolalarim
                   </Link>
                   <button className="user-dropdown-logout" onClick={logout}>
                     Chiqish
@@ -176,11 +198,28 @@ function Navbar() {
             </Link>
           </li>
           {user && (
-            <li>
-              <Link to="/saved" onClick={() => setMenuOpen(false)}>
-                <FaBookmark /> Saqlangan
-              </Link>
-            </li>
+            <>
+              <li>
+                <Link to="/profile" onClick={() => setMenuOpen(false)}>
+                  <FaUserCircle /> Profil
+                </Link>
+              </li>
+              <li>
+                <Link to="/saved" onClick={() => setMenuOpen(false)}>
+                  <FaBookmark /> Saqlangan
+                </Link>
+              </li>
+              <li>
+                <Link to="/submit" onClick={() => setMenuOpen(false)}>
+                  <MdOutlineEdit /> Maqola yuborish
+                </Link>
+              </li>
+              <li>
+                <Link to="/my-posts" onClick={() => setMenuOpen(false)}>
+                  <FaRegFileLines /> Mening maqolalarim
+                </Link>
+              </li>
+            </>
           )}
         </ul>
 

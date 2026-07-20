@@ -8,6 +8,10 @@ import Quotes from "../quotes/quotes";
 import Author from "../quotes/elements/author";
 import SingleQuote from "../quotes/elements/SingleQuote";
 import SavedPage from "../saved/SavedPage";
+import SubmitPage from "../submit/SubmitPage";
+import MyPostsPage from "../submit/MyPostsPage";
+import ProfilePage from "../profile/ProfilePage";
+import AuthorProfilePage from "../profile/AuthorProfilePage";
 
 function App() {
   const location = useLocation();
@@ -29,6 +33,10 @@ function App() {
         <Route path="/quotes/author/:slug" element={<Author />} />
         <Route path="/quotes/:slug" element={<Quotes />} />
         <Route path="/saved" element={<SavedPage />} />
+        <Route path="/submit" element={<SubmitPage />} />
+        <Route path="/my-posts" element={<MyPostsPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/users/:userId" element={<AuthorProfilePage />} />
       </Routes>
       <Footer />
     </div>

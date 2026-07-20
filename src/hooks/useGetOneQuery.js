@@ -20,7 +20,14 @@ export const useGetOneQuery = (slug) => {
         setLoading(true);
         setError(null);
 
-        const res = await fetch(`${BASE_URL}/posts/${slug}/`);
+        const token = localStorage.getItem("access_token");
+        let res = await fetch(`${BASE_URL}/posts/${slug}/`, {
+          headers: token ? { Authorization: `Bearer ${token}` } : {},
+        });
+        // Token muddati o'tgan bo'lsa — headersiz (anonim) qayta urinish
+        if (res.status === 401 && token) {
+          res = await fetch(`${BASE_URL}/posts/${slug}/`);
+        }
         if (!res.ok) throw new Error("Post topilmadi");
 
         const data = await res.json();

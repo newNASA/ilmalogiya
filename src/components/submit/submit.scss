@@ -1,0 +1,473 @@
+.submit-page {
+  max-width: 860px;
+  margin: 100px auto 60px;
+  padding: 0 20px;
+
+  .submit-header {
+    margin-bottom: 26px;
+
+    h1 {
+      font-size: 2rem;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    p {
+      color: var(--grey);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+  }
+
+  // ── Forma ──
+  .submit-form {
+    background-color: var(--white);
+    border-radius: 15px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .submit-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    > span {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    input[type="text"],
+    textarea {
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 1.5px solid var(--grey);
+      background-color: var(--background);
+      color: var(--text);
+      font-size: 15px;
+      outline: none;
+      font-family: inherit;
+      transition: border-color 0.25s;
+
+      &:focus {
+        border-color: var(--accent);
+      }
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 180px;
+      line-height: 1.6;
+    }
+  }
+
+  // ── Matn editori ──
+  .desc-editor {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    .desc-editor-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 6px 8px;
+      background-color: var(--background);
+      border: 1.5px solid var(--grey);
+      border-radius: 12px;
+
+      .desc-editor-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2px;
+
+        button {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 32px;
+          height: 32px;
+          border-radius: 8px;
+          border: none;
+          background: none;
+          color: var(--text);
+          cursor: pointer;
+          font-size: 13px;
+          transition: 0.2s;
+
+          &:hover {
+            background-color: var(--white);
+            color: var(--accent);
+          }
+        }
+      }
+
+    }
+
+    .desc-editor-content {
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 1.5px solid var(--grey);
+      background-color: var(--background);
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.6;
+      min-height: 180px;
+      outline: none;
+      overflow-wrap: break-word;
+      transition: border-color 0.25s;
+
+      &:focus {
+        border-color: var(--accent);
+      }
+
+      // Placeholder (bo'sh bo'lganda)
+      &:empty::before {
+        content: attr(data-placeholder);
+        color: var(--grey);
+        pointer-events: none;
+      }
+
+      h2 {
+        color: var(--accent);
+        margin: 8px 0;
+      }
+
+      blockquote {
+        border-left: 3px solid var(--accent);
+        padding-left: 12px;
+        margin: 8px 0;
+        font-style: italic;
+        color: var(--grey);
+      }
+
+      code {
+        background-color: var(--white);
+        padding: 2px 6px;
+        border-radius: 6px;
+        font-family: monospace;
+        font-size: 0.9em;
+      }
+
+      ul {
+        padding-left: 22px;
+        margin: 8px 0;
+      }
+
+      a {
+        color: var(--accent);
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .submit-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    .submit-tag {
+      padding: 6px 14px;
+      border-radius: 50px;
+      font-size: 13px;
+      background-color: var(--background);
+      color: var(--text);
+      border: 1px solid var(--grey);
+      cursor: pointer;
+      transition: 0.2s;
+
+      &:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+
+      &.active {
+        background-color: var(--accent);
+        border-color: var(--accent);
+        color: var(--white);
+      }
+    }
+  }
+
+  .submit-image-drop {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 32px;
+    border: 2px dashed var(--grey);
+    border-radius: 12px;
+    background-color: var(--background);
+    color: var(--grey);
+    cursor: pointer;
+    transition: 0.2s;
+    font-size: 14px;
+
+    svg {
+      font-size: 26px;
+    }
+
+    &:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+  }
+
+  .submit-image-preview {
+    position: relative;
+    width: fit-content;
+    max-width: 100%;
+
+    img {
+      max-width: 100%;
+      max-height: 260px;
+      border-radius: 12px;
+      display: block;
+    }
+
+    .remove-image {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.55);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.2s;
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.8);
+      }
+    }
+  }
+
+  .submit-error {
+    color: #c0392b;
+    font-size: 13.5px;
+  }
+
+  .submit-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 28px;
+    background-color: var(--accent);
+    color: var(--white);
+    border: 1px solid var(--accent);
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+    align-self: flex-start;
+
+    &:hover {
+      opacity: 0.85;
+    }
+
+    &:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
+    &.outline {
+      background: none;
+      color: var(--accent);
+    }
+  }
+
+  // ── Bo'sh / muvaffaqiyat holati ──
+  .submit-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 20px;
+    text-align: center;
+    gap: 12px;
+
+    .submit-empty-icon {
+      font-size: 48px;
+      color: var(--grey);
+
+      &.success {
+        color: #27ae60;
+      }
+    }
+
+    h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+    }
+
+    p {
+      color: var(--grey);
+      max-width: 420px;
+      line-height: 1.6;
+    }
+
+    .submit-success-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .submit-btn {
+      align-self: center;
+    }
+  }
+
+  // ── Mening maqolalarim ──
+  .myposts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .myposts-card {
+    display: flex;
+    background-color: var(--white);
+    border-radius: 15px;
+    overflow: hidden;
+
+    .myposts-media {
+      width: 200px;
+      flex-shrink: 0;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+    }
+
+    .myposts-body {
+      flex: 1;
+      padding: 1.3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      .myposts-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .myposts-status {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 12px;
+        border-radius: 50px;
+        font-size: 13px;
+        font-weight: 600;
+
+        &.pending {
+          background-color: rgba(230, 160, 30, 0.12);
+          color: #b7791f;
+        }
+
+        &.approved {
+          background-color: rgba(39, 174, 96, 0.12);
+          color: #27ae60;
+        }
+
+        &.rejected {
+          background-color: rgba(192, 57, 43, 0.1);
+          color: #c0392b;
+        }
+      }
+
+      .myposts-date {
+        color: var(--grey);
+        font-size: 13px;
+      }
+
+      h2 {
+        color: var(--accent);
+        font-size: 1.15rem;
+        line-height: 1.35;
+      }
+
+      a h2:hover {
+        text-decoration: underline;
+      }
+
+      p {
+        color: var(--text);
+        font-size: 0.92rem;
+        line-height: 1.5;
+      }
+
+      .myposts-reason {
+        background-color: rgba(192, 57, 43, 0.07);
+        border-left: 3px solid #c0392b;
+        padding: 8px 12px;
+        border-radius: 6px;
+        font-size: 0.88rem;
+      }
+    }
+  }
+
+  .myposts-skeleton {
+    height: 150px;
+    border-radius: 15px;
+    background: var(--white);
+    position: relative;
+    overflow: hidden;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -50%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+      animation: shimmer 1.2s infinite;
+    }
+  }
+}
+
+// ── Responsive ──
+@media screen and (max-width: 600px) {
+  .submit-page {
+    margin-top: 90px;
+    padding: 0 16px;
+
+    .submit-header h1 {
+      font-size: 1.6rem;
+    }
+
+    .submit-form {
+      padding: 1.3rem;
+    }
+
+    .myposts-card {
+      flex-direction: column;
+
+      .myposts-media {
+        width: 100%;
+        height: 180px;
+      }
+    }
+  }
+}

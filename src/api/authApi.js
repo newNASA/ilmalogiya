@@ -34,11 +34,13 @@ async function refreshAccessToken() {
 
 async function authFetch(url, options = {}) {
   let { access } = getTokens();
+  const isFormData = options.body instanceof FormData;
   const doRequest = (token) =>
     fetch(url, {
       ...options,
       headers: {
-        "Content-Type": "application/json",
+        // FormData bo'lsa Content-Type ni brauzer o'zi qo'yadi (boundary bilan)
+        ...(isFormData ? {} : { "Content-Type": "application/json" }),
         ...(options.headers || {}),
         Authorization: `Bearer ${token}`,
       },
@@ -73,6 +75,23 @@ export async function getProfile() {
   const res = await authFetch(`${BASE}/auth/me/`);
   if (!res.ok) return null;
   return res.json();
+}
+
+export async function updateProfile(data) {
+  const res = await authFetch(`${BASE}/auth/me/`, {
+    method: "PATCH",
+    body: JSON.stringify(data),
+  });
+  const resData = await res.json().catch(() => null);
+  if (!res.ok) {
+    const msg =
+      resData?.social_links?.[0] ||
+      resData?.full_name?.[0] ||
+      resData?.detail ||
+      "Profilni saqlashda xatolik";
+    throw new Error(msg);
+  }
+  return resData;
 }
 
 export async function getSavedItems() {
@@ -111,6 +130,30 @@ export async function unsaveQuote(quoteId) {
     body: JSON.stringify({ quote_id: quoteId }),
   });
   return res.ok;
+}
+
+export async function submitPost(formData) {
+  const res = await authFetch(`${BASE}/posts/submit/`, {
+    method: "POST",
+    body: formData,
+  });
+  const data = await res.json().catch(() => null);
+  if (!res.ok) {
+    const msg =
+      data?.file?.[0] ||
+      data?.title?.[0] ||
+      data?.description?.[0] ||
+      data?.detail ||
+      "Yuborishda xatolik yuz berdi";
+    throw new Error(msg);
+  }
+  return data;
+}
+
+export async function getMyPosts() {
+  const res = await authFetch(`${BASE}/posts/my-posts/`);
+  if (!res.ok) return null;
+  return res.json();
 }
 
 export function hasToken() {

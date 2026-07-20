@@ -1,2 +1,3 @@
 /.well-known/*    /:splat   200
+/sitemap.xml    https://api.ilmalogiya.uz/sitemap.xml    200
 /*                /index.html   200

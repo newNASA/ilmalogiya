@@ -47,6 +47,10 @@ export function AuthProvider({ children }) {
     setSavedQuoteIds(new Set());
   }
 
+  function updateUser(profile) {
+    setUser(profile);
+  }
+
   function toggleSavedPost(postId, isSaved) {
     setSavedPostIds((prev) => {
       const next = new Set(prev);
@@ -65,7 +69,7 @@ export function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider
-      value={{ user, loading, loginGoogle, logout, savedPostIds, savedQuoteIds, toggleSavedPost, toggleSavedQuote }}
+      value={{ user, loading, loginGoogle, logout, updateUser, savedPostIds, savedQuoteIds, toggleSavedPost, toggleSavedQuote }}
     >
       {children}
     </AuthContext.Provider>

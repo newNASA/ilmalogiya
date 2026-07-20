@@ -15,6 +15,8 @@ import { IoClose } from "react-icons/io5";
 import { LuSlidersHorizontal } from "react-icons/lu";
 import { usePostsQuery } from "../../hooks/usePostsQuery";
 import { Link } from "react-router-dom";
+import { setPageMeta } from "../../utils/seo.js";
+import NotFound from "../notFound/NotFound";
 
 const MemoizedRightPosts = memo(RightPosts);
 
@@ -120,6 +122,13 @@ const MainSection = () => {
     [navigate]
   );
 
+  // Post topilmasa Google indeksiga tushmasligi uchun noindex
+  useEffect(() => {
+    if (slug && detailError) {
+      setPageMeta({ title: "Post topilmadi | Ilmalogiya", noindex: true });
+    }
+  }, [slug, detailError]);
+
   // Close drawer on outside click
   const drawerRef = useRef(null);
 
@@ -132,7 +141,7 @@ const MainSection = () => {
           detailLoading ? (
             <Loader />
           ) : detailError ? (
-            <div className="error">{detailError}</div>
+            <NotFound />
           ) : (
             <PostDetail post={detailedPost} />
           )

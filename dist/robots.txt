@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /profile
+Disallow: /my-posts
+Disallow: /submit
+Disallow: /saved
+
+Sitemap: https://ilmalogiya.uz/sitemap.xml

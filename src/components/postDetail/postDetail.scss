@@ -68,13 +68,14 @@
 
     h1 {
         color: var(--accent);
-        font-size: 2.5rem;
+        font-size: 1.75rem;
     }
 
     .post-date {
         display: flex;
         align-items: center;
-        gap: 15px;
+        flex-wrap: wrap;
+        gap: 8px 15px;
         margin: 15px 0;
         margin-bottom: 30px;
 
@@ -84,14 +85,27 @@
             gap: 5px;
             color: var(--text);
             font-size: 0.8rem;
+            white-space: nowrap;
 
             svg {
                 color: var(--accent);
+                flex-shrink: 0;
             }
         }
     }
 
     .post-description {
+        line-height: 1.4;
+        a {
+            color: var(--accent);
+            text-decoration: underline;
+            font-weight: 600;
+
+            &:hover {
+                opacity: 0.8;
+            }
+        }
+
         code {
             font-family: Cascadia Code;
             background-color: var(--background);
@@ -111,6 +125,67 @@
             color: var(--accent);
             margin-top: 5px;
             margin-bottom: 5px;
+        }
+    }
+
+    // ── Muallif ──
+    .post-author {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 30px;
+        padding: 12px 16px;
+        background-color: var(--background);
+        border-radius: 12px;
+
+        .post-author-label {
+            color: var(--accent);
+            font-size: 14px;
+        }
+
+        .post-author-name {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: 600;
+            color: var(--text);
+            font-size: 14px;
+
+            &:hover {
+                color: var(--accent);
+                text-decoration: underline;
+            }
+
+            .post-author-verified {
+                color: var(--accent);
+                font-size: 15px;
+            }
+        }
+
+        .post-author-links {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-left: 4px;
+
+            a {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                background-color: var(--accent);
+                color: var(--white);
+                font-size: 15px;
+                transition: 0.2s;
+
+                &:hover {
+                    background-color: var(--accent);
+                    color: var(--white);
+                }
+            }
         }
     }
 

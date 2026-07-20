@@ -2,10 +2,14 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { MdOutlineDateRange } from "react-icons/md";
 import { FaRegEdit, FaRegEye, FaTelegramPlane, FaFacebookF, FaCheck, FaBookmark, FaRegBookmark } from "react-icons/fa";
-import { FaArrowLeftLong, FaXTwitter } from "react-icons/fa6";
+import { FaArrowLeftLong, FaXTwitter, FaCircleCheck } from "react-icons/fa6";
 import { IoClose, IoLinkOutline } from "react-icons/io5";
 import { useAuth } from "../../context/AuthContext";
 import { savePost, unsavePost } from "../../api/authApi";
+import { getSocialMeta } from "../../utils/socialIcons.jsx";
+import { stripHTML } from "../../utils/stripHTML.jsx";
+import { setPageMeta, resetPageMeta } from "../../utils/seo.js";
+import NotFound from "../notFound/NotFound";
 import "./postDetail.scss";
 
 const PostDetail = ({ post }) => {
@@ -63,11 +67,18 @@ const PostDetail = ({ post }) => {
 
   useEffect(() => {
     if (post) {
-      document.title = `${post.title} | Ilmalogiya`;
+      const cleanDesc = stripHTML(post.description || "").slice(0, 160);
+      setPageMeta({
+        title: `${post.title} | Ilmalogiya`,
+        description: cleanDesc,
+        path: `/posts/${post.slug}`,
+        image: post.file || undefined,
+      });
     } else {
-      document.title = "Post topilmadi | Ilmalogiya";
+      // Topilmagan sahifa Google indeksiga tushmasligi uchun noindex
+      setPageMeta({ title: "Post topilmadi | Ilmalogiya", noindex: true });
     }
-    return () => { document.title = "Ilmalogiya"; };
+    return () => { resetPageMeta(); };
   }, [post]);
 
   useEffect(() => {
@@ -81,7 +92,7 @@ const PostDetail = ({ post }) => {
     };
   }, [isImageModalOpen]);
 
-  if (!post) return <p>Post topilmadi</p>;
+  if (!post) return <NotFound />;
 
   const formatDateTime = (dateString) => {
     if (!dateString) return "";
@@ -166,6 +177,41 @@ const PostDetail = ({ post }) => {
           className="post-description"
           dangerouslySetInnerHTML={{ __html: post.description }}
         />
+
+        {/* Muallif (user yuborgan postlar uchun) */}
+        {post.author_name && (
+          <div className="post-author">
+            <span className="post-author-label">Muallif:</span>
+            {post.author ? (
+              <Link to={`/users/${post.author}`} className="post-author-name">
+                {post.author_name}
+                {post.author_verified && (
+                  <FaCircleCheck className="post-author-verified" title="Tasdiqlangan" />
+                )}
+              </Link>
+            ) : (
+              <span className="post-author-name">{post.author_name}</span>
+            )}
+            {post.author_links?.length > 0 && (
+              <span className="post-author-links">
+                {post.author_links.map((url) => {
+                  const { Icon, label } = getSocialMeta(url);
+                  return (
+                    <a
+                      key={url}
+                      href={url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title={label}
+                    >
+                      <Icon />
+                    </a>
+                  );
+                })}
+              </span>
+            )}
+          </div>
+        )}
 
         {/* Inline Share tugmalari — post oxirida */}
         <div className="share-section">
