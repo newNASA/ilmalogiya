@@ -5,6 +5,7 @@ import { FaRegClock, FaCheck, FaXmark } from "react-icons/fa6";
 import { useAuth } from "../../context/AuthContext";
 import { getMyPosts } from "../../api/authApi";
 import { stripHTML } from "../../utils/stripHTML.jsx";
+import { resolveMediaUrl } from "../../utils/mediaUrl.js";
 import "./submit.scss";
 
 const STATUS_META = {
@@ -70,7 +71,7 @@ function MyPostsPage() {
               >
                 {post.file && (
                   <div className="myposts-media">
-                    <img src={post.file} alt={post.title} loading="lazy" />
+                    <img src={resolveMediaUrl(post.file)} alt={post.title} loading="lazy" />
                   </div>
                 )}
                 <div className="myposts-body">

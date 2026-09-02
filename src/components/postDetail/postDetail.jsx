@@ -9,6 +9,7 @@ import { savePost, unsavePost } from "../../api/authApi";
 import { getSocialMeta } from "../../utils/socialIcons.jsx";
 import { stripHTML } from "../../utils/stripHTML.jsx";
 import { setPageMeta, resetPageMeta } from "../../utils/seo.js";
+import { resolveMediaUrl } from "../../utils/mediaUrl.js";
 import NotFound from "../notFound/NotFound";
 import "./postDetail.scss";
 
@@ -106,6 +107,7 @@ const PostDetail = ({ post }) => {
   };
 
   const isVideo = post.file && /\.(mp4|webm|ogg)$/i.test(post.file);
+  const fileUrl = resolveMediaUrl(post.file);
 
   return (
     <>
@@ -115,12 +117,12 @@ const PostDetail = ({ post }) => {
           <div className="post-img">
             {isVideo ? (
               <video controls autoPlay muted preload="metadata">
-                <source src={post.file} type="video/mp4" />
+                <source src={fileUrl} type="video/mp4" />
                 Video yuklanmadi
               </video>
             ) : (
               <img 
-                src={post.file} 
+                src={fileUrl} 
                 alt={post.title} 
                 loading="lazy"
                 onClick={() => setIsImageModalOpen(true)}
@@ -269,7 +271,7 @@ const PostDetail = ({ post }) => {
             className="image-modal-content"
             onClick={(e) => e.stopPropagation()}
           >
-            <img src={post.file} alt={post.title} />
+            <img src={fileUrl} alt={post.title} />
             {post.imgdesc && (
               <div className="image-modal-caption">{post.imgdesc}</div>
             )}

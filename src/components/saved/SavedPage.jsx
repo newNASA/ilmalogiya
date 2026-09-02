@@ -6,6 +6,7 @@ import { FaQuoteRight } from "react-icons/fa";
 import { getSavedItems, unsavePost, unsaveQuote } from "../../api/authApi";
 import { useAuth } from "../../context/AuthContext";
 import { stripHTML } from "../../utils/stripHTML.jsx";
+import { resolveMediaUrl } from "../../utils/mediaUrl.js";
 import "./saved.scss";
 
 const TABS = [
@@ -157,6 +158,7 @@ function SavedPage() {
               const isVideo = post.file && /\.(mp4|webm|ogg)$/i.test(post.file);
               const cleanDesc = stripHTML(post.description || "");
               const postLink = post.slug ? `/posts/${post.slug}` : `/posts/${post.id}`;
+              const fileUrl = resolveMediaUrl(post.file);
               return (
                 <div key={post.id} className={`saved-post-card shadow-elegant${post.file ? "" : " no-media"}`}>
                   {post.file && (
@@ -164,12 +166,12 @@ function SavedPage() {
                       {isVideo ? (
                         <div className="saved-video-thumb">
                           <video muted preload="auto" playsInline>
-                            <source src={post.file} type="video/mp4" />
+                            <source src={fileUrl} type="video/mp4" />
                           </video>
                           <span className="saved-play-icon"><FaPlay /></span>
                         </div>
                       ) : (
-                        <img src={post.file} alt={post.title} loading="lazy" />
+                        <img src={fileUrl} alt={post.title} loading="lazy" />
                       )}
                     </Link>
                   )}

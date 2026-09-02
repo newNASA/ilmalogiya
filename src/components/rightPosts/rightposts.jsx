@@ -5,11 +5,11 @@ import { stripHTML } from "../../utils/stripHTML";
 import { memo } from "react";
 import { IoLogoInstagram } from "react-icons/io5";
 import { FaArrowRightLong } from "react-icons/fa6";
+import { resolveMediaUrl } from "../../utils/mediaUrl.js";
 
 const RightPosts = ({ randomPost, lastPost }) => {
   const cleanRandomDesc = stripHTML(randomPost?.description || "");
   const cleanLastDesc = stripHTML(lastPost?.description || "");
-  const url = import.meta.env.VITE_API_MEDIA_URL;
 
   return (
     <div className="rightposts">
@@ -49,7 +49,7 @@ const RightPosts = ({ randomPost, lastPost }) => {
           {randomPost.file && (
             <div className="img">
               <img 
-                src={randomPost.file.startsWith("http") ? randomPost.file : url + randomPost.file} 
+                src={resolveMediaUrl(randomPost.file)} 
                 alt={randomPost.title} 
               />
             </div>
@@ -95,7 +95,7 @@ const RightPosts = ({ randomPost, lastPost }) => {
           {lastPost.file && (
             <div className="img">
               <img 
-                src={lastPost.file.startsWith("http") ? lastPost.file : url + lastPost.file} 
+                src={resolveMediaUrl(lastPost.file)} 
                 alt={lastPost.title} 
               />
             </div>

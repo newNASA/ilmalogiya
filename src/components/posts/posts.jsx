@@ -3,6 +3,7 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import { FaBookmark, FaRegBookmark, FaPlay } from "react-icons/fa";
 import "./posts.scss";
 import { stripHTML } from "../../utils/stripHTML.jsx";
+import { resolveMediaUrl } from "../../utils/mediaUrl.js";
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { savePost, unsavePost } from "../../api/authApi";
@@ -19,7 +20,6 @@ const Posts = ({
     return <h1 className="postloading-message">Hech qanday post topilmadi</h1>;
   }
 
-  const url = import.meta.env.VITE_API_MEDIA_URL;
 
   async function handleBookmark(e, postId, isSaved) {
     e.preventDefault();
@@ -41,6 +41,7 @@ const Posts = ({
         const cleanDescription = stripHTML(post.description || "");
         const postLink = post.slug ? `/posts/${post.slug}` : `/posts/${post.id}`;
         const isSaved = savedPostIds.has(post.id) || post.is_saved === true;
+        const fileUrl = resolveMediaUrl(post.file);
 
         return (
           <div
@@ -53,13 +54,13 @@ const Posts = ({
                   {isVideo ? (
                     <div className="video-thumb">
                       <video muted preload="auto" playsInline>
-                        <source src={url + post.file} type="video/mp4" />
+                        <source src={fileUrl} type="video/mp4" />
                       </video>
                       <span className="video-play-icon"><FaPlay /></span>
                     </div>
                   ) : (
                     <img
-                      src={url + post.file}
+                      src={fileUrl}
                       alt={post.title}
                       loading="lazy"
                     />
