@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-export function useHomeData(page = 1, searchQuery = "", selectedTags = []) {
+export function useHomeData(page = 1, searchQuery = "", selectedTags = [], excludeSlug = "") {
   // Barcha turdagi ma'lumotlar uchun state
   const [data, setData] = useState({
     tags: [],
@@ -36,12 +36,43 @@ export function useHomeData(page = 1, searchQuery = "", selectedTags = []) {
 
         const result = await res.json();
 
+        // Sidebar uchun: agar excludeSlug berilgan bo'lsa, random/latest ni alohida olamiz
+        let randomPost = result.random_post || null;
+        let latestPost = result.latest_post || null;
+
+        if (excludeSlug) {
+          // Random post hozirgi post bo'lsa — yangi random so'rov
+          const sidebarPromises = [];
+
+          const needNewRandom = randomPost?.slug === excludeSlug;
+          const needNewLatest = latestPost?.slug === excludeSlug;
+
+          if (needNewRandom) {
+            sidebarPromises.push(
+              fetch(`${BASE_URL}/posts/random/?exclude=${excludeSlug}`)
+                .then((r) => (r.ok ? r.json() : null))
+                .then((d) => { randomPost = d; })
+            );
+          }
+          if (needNewLatest) {
+            sidebarPromises.push(
+              fetch(`${BASE_URL}/posts/latest/?exclude=${excludeSlug}`)
+                .then((r) => (r.ok ? r.json() : null))
+                .then((d) => { latestPost = d; })
+            );
+          }
+
+          if (sidebarPromises.length > 0) {
+            await Promise.all(sidebarPromises);
+          }
+        }
+
         // Ma'lumotlarni state'ga joylaymiz
         setData({
           tags: result.tags || [],
           posts: result.posts?.results || [],
-          randomPost: result.random_post || null,
-          latestPost: result.latest_post || null,
+          randomPost,
+          latestPost,
         });
 
         // Pagination ma'lumotlari
@@ -61,7 +92,7 @@ export function useHomeData(page = 1, searchQuery = "", selectedTags = []) {
     };
 
     fetchHomeData();
-  }, [page, seed, searchQuery, selectedTags]); // Parametrlar o'zgarganda qayta chaqiriladi
+  }, [page, seed, searchQuery, selectedTags, excludeSlug]); // Parametrlar o'zgarganda qayta chaqiriladi
 
   return {
     tags: data.tags,
@@ -72,4 +103,4 @@ export function useHomeData(page = 1, searchQuery = "", selectedTags = []) {
     loading,
     error
   };
-}
+}

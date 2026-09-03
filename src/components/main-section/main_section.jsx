@@ -65,7 +65,7 @@ const MainSection = () => {
     pagination,
     loading: homeLoading,
     error: homeError,
-  } = useHomeData(currentPage, searchQuery, selectedTags);
+  } = useHomeData(currentPage, searchQuery, selectedTags, slug || "");
 
   const {
     post: detailedPost,
