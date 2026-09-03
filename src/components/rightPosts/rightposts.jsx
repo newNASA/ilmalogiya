@@ -64,11 +64,6 @@ const RightPosts = ({ randomPost, lastPost, randomQuote }) => {
               <span>— {randomQuote.author.name}</span>
             </Link>
           )}
-          <div className="post_link">
-            <Link to={`/quotes/${randomQuote.slug}`}>
-              Ko'proq o'qish <FaArrowRightLong />
-            </Link>
-          </div>
         </div>
       )}
 
