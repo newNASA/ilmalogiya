@@ -441,12 +441,6 @@
     text-decoration: none;
     display: flex;
     flex-direction: column;
-    transition: box-shadow 0.2s, transform 0.18s;
-
-    &:hover {
-        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
-        transform: translateY(-2px);
-    }
 
     &__img {
         width: 100%;
@@ -460,11 +454,6 @@
             height: 100%;
             object-fit: cover;
             display: block;
-            transition: transform 0.3s ease;
-        }
-
-        &:hover img {
-            transform: scale(1.04);
         }
     }
 
@@ -528,12 +517,7 @@
 
         svg {
             font-size: 0.7rem;
-            transition: transform 0.2s;
         }
-    }
-
-    &:hover &__link svg {
-        transform: translateX(3px);
     }
 
     // Skeleton
