@@ -10,6 +10,7 @@ import { getSocialMeta } from "../../utils/socialIcons.jsx";
 import { stripHTML } from "../../utils/stripHTML.jsx";
 import { setPageMeta, resetPageMeta } from "../../utils/seo.js";
 import { resolveMediaUrl } from "../../utils/mediaUrl.js";
+import RelatedPosts from "./RelatedPosts";
 import NotFound from "../notFound/NotFound";
 import "./postDetail.scss";
 
@@ -251,6 +252,9 @@ const PostDetail = ({ post }) => {
         <Link to="/" className="back-btn">
           <FaArrowLeftLong /> Bosh sahifaga qaytish
         </Link>
+
+        {/* Aloqador maqolalar */}
+        <RelatedPosts slug={post.slug} />
       </div>
 
 
