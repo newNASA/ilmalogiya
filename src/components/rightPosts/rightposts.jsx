@@ -4,10 +4,10 @@ import "./rightposts.scss";
 import { stripHTML } from "../../utils/stripHTML";
 import { memo } from "react";
 import { IoLogoInstagram } from "react-icons/io5";
-import { FaArrowRightLong } from "react-icons/fa6";
+import { FaArrowRightLong, FaQuoteLeft } from "react-icons/fa6";
 import { resolveMediaUrl } from "../../utils/mediaUrl.js";
 
-const RightPosts = ({ randomPost, lastPost }) => {
+const RightPosts = ({ randomPost, lastPost, randomQuote }) => {
   const cleanRandomDesc = stripHTML(randomPost?.description || "");
   const cleanLastDesc = stripHTML(lastPost?.description || "");
 
@@ -19,8 +19,8 @@ const RightPosts = ({ randomPost, lastPost }) => {
         </div>
         <div className="text">
           <p>
-            Eng so‘nggi yangiliklar, maqolalar va texnologiyalar haqida birinchi
-            bo‘lib xabardor bo‘ling!
+            Eng so'nggi yangiliklar, maqolalar va texnologiyalar haqida birinchi
+            bo'lib xabardor bo'ling!
           </p>
         </div>
         <div className="link">
@@ -40,6 +40,37 @@ const RightPosts = ({ randomPost, lastPost }) => {
           </a>
         </div>
       </div>
+
+      {/* Random Quote */}
+      {randomQuote && (
+        <div className="sidebar-quote shadow-elegant">
+          <h2>Iqtibos</h2>
+          <div className="sidebar-quote__body">
+            <FaQuoteLeft className="sidebar-quote__icon" />
+            <p className="sidebar-quote__text">{randomQuote.text}</p>
+          </div>
+          {randomQuote.author && (
+            <Link
+              to={`/quotes/author/${randomQuote.author.slug}`}
+              className="sidebar-quote__author"
+            >
+              {randomQuote.author.photo && (
+                <img
+                  src={resolveMediaUrl(randomQuote.author.photo)}
+                  alt={randomQuote.author.name}
+                  className="sidebar-quote__author-img"
+                />
+              )}
+              <span>— {randomQuote.author.name}</span>
+            </Link>
+          )}
+          <div className="post_link">
+            <Link to={`/quotes/${randomQuote.slug}`}>
+              Ko'proq o'qish <FaArrowRightLong />
+            </Link>
+          </div>
+        </div>
+      )}
 
       {randomPost && (
         <div className="randompost shadow-elegant">
@@ -136,4 +167,4 @@ const RightPosts = ({ randomPost, lastPost }) => {
   );
 };
 
-export default memo(RightPosts);
+export default memo(RightPosts);

@@ -62,6 +62,7 @@ const MainSection = () => {
     posts,
     randomPost,
     latestPost,
+    randomQuote,
     pagination,
     loading: homeLoading,
     error: homeError,
@@ -227,7 +228,7 @@ const MainSection = () => {
         {homeLoading ? (
           <div className="text-center py-8">{onLoad()}</div>
         ) : (
-          <MemoizedRightPosts randomPost={randomPost} lastPost={latestPost} />
+          <MemoizedRightPosts randomPost={randomPost} lastPost={latestPost} randomQuote={randomQuote} />
         )}
       </div>
 

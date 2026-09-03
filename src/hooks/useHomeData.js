@@ -9,6 +9,7 @@ export function useHomeData(page = 1, searchQuery = "", selectedTags = [], exclu
     posts: [],
     randomPost: null,
     latestPost: null,
+    randomQuote: null,
   });
 
   const [seed, setSeed] = useState(() => Math.random().toString());
@@ -31,10 +32,16 @@ export function useHomeData(page = 1, searchQuery = "", selectedTags = [], exclu
           url += `&tag=${encodeURIComponent(selectedTags.join(","))}`;
         }
 
-        const res = await fetch(url);
+        // Home va random quote parallel olamiz
+        const [res, quoteRes] = await Promise.all([
+          fetch(url),
+          fetch(`${BASE_URL}/quotes/quotes/random/`),
+        ]);
+
         if (!res.ok) throw new Error(`Xatolik yuz berdi: ${res.status}`);
 
         const result = await res.json();
+        const randomQuote = quoteRes.ok ? await quoteRes.json() : null;
 
         // Sidebar uchun: agar excludeSlug berilgan bo'lsa, random/latest ni alohida olamiz
         let randomPost = result.random_post || null;
@@ -73,6 +80,7 @@ export function useHomeData(page = 1, searchQuery = "", selectedTags = [], exclu
           posts: result.posts?.results || [],
           randomPost,
           latestPost,
+          randomQuote,
         });
 
         // Pagination ma'lumotlari
@@ -80,7 +88,6 @@ export function useHomeData(page = 1, searchQuery = "", selectedTags = [], exclu
           count: result.posts?.count || 0,
           next: result.posts?.next,
           previous: result.posts?.previous,
-          // Agar har bir sahifada 10 ta post bo'lsa:
           totalPages: result.posts?.count ? Math.ceil(result.posts.count / 10) : 1,
         });
 
@@ -92,15 +99,17 @@ export function useHomeData(page = 1, searchQuery = "", selectedTags = [], exclu
     };
 
     fetchHomeData();
-  }, [page, seed, searchQuery, selectedTags, excludeSlug]); // Parametrlar o'zgarganda qayta chaqiriladi
+  }, [page, seed, searchQuery, selectedTags, excludeSlug]);
 
   return {
     tags: data.tags,
     posts: data.posts,
     randomPost: data.randomPost,
     latestPost: data.latestPost,
+    randomQuote: data.randomQuote,
     pagination,
     loading,
     error
   };
-}
+}
+
