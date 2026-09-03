@@ -9,7 +9,7 @@ import Posts from "../posts/posts";
 import PostDetail from "../postDetail/postDetail";
 import Pagination from "../pagination/pagination";
 import RightPosts from "../rightPosts/rightposts";
-import Loader from "../loader/loader";
+import PostDetailSkeleton from "../postDetail/PostDetailSkeleton";
 import Postloading from "../postloading/postloading.jsx";
 import { IoClose } from "react-icons/io5";
 import { LuSlidersHorizontal } from "react-icons/lu";
@@ -139,7 +139,7 @@ const MainSection = () => {
       <div className="left">
         {slug ? (
           detailLoading ? (
-            <Loader />
+            <PostDetailSkeleton />
           ) : detailError ? (
             <NotFound />
           ) : (
